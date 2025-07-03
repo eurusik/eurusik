@@ -1,4 +1,4 @@
-### 💻 Made Frontends For
+### 💻 Made Frontends for
 
 - 🛒 [rozetka.ua](https://rozetka.ua)
 - 🛍️ [silpo.ua](https://www.silpo.ua)
