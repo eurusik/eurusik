@@ -92,11 +92,3 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
-
-# Deployment and infrastructure files (keep private)
-k8s/
-scripts/
-docs/
-.github/workflows/ci-cd.yml
-.github/workflows/deploy-k3s.yml
-README-DEPLOYMENT.md
