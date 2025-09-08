@@ -92,3 +92,10 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
+
+# Deployment files (keep private for security)
+k8s/
+scripts/
+docs/deployment/
+.kube/
+*.kubeconfig
