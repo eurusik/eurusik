@@ -28,10 +28,11 @@ Senior Frontend Developer with **11+ years of experience** building scalable web
 
 ## 🏆 Professional Experience
 
-- **🛒 Сільпо** - Senior Frontend Developer (Current)
-- **🛍️ Rozetka** - Frontend Team Lead
-- **🎮 Electronic Arts** - Senior Software Engineer
+- **🛒 Сільпо** - Frontend Tech Lead
+- **🛍️ Rozetka** - Frontend Lead
 - **💳 Mastercard** - Frontend Developer
+- **🎮 Electronic Arts** - Software Engineer
+
 
 ## 📊 GitHub Stats
 
