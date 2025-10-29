@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
 import Companies from './components/Companies'
@@ -11,13 +12,16 @@ import Contact from './components/Contact'
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      <Hero />
-      <About />
-      <Companies />
-      <Experience />
-      <Skills />
-      <Education />
-      <Contact />
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Companies />
+        <Experience />
+        <Skills />
+        <Education />
+        <Contact />
+      </main>
     </div>
   )
 }

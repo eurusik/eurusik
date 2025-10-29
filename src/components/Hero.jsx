@@ -8,7 +8,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-hero-gradient opacity-90"></div>
       
@@ -57,19 +57,20 @@ const Hero = () => {
             <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl">
               <img 
                 src="/avatar.jpg" 
-                alt="Eugene Rusakov"
+                alt="Eugene Rusakov - Senior Frontend Developer"
                 className="w-full h-full rounded-full object-cover"
+                loading="eager"
               />
             </div>
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-600/20 blur-xl"></div>
           </motion.div>
 
-          {/* Name */}
+          {/* Main Heading - H1 for SEO */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-poppins"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           >
             Eugene Rusakov
           </motion.h1>
@@ -78,10 +79,20 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 font-light"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-4 font-light"
           >
-            Frontend Developer / Tech Lead
+            Senior Frontend Developer | Tech Lead
+          </motion.p>
+
+          {/* Subtitle with keywords */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-lg sm:text-xl text-white/80 mb-12 font-light max-w-2xl mx-auto"
+          >
+            11+ years of experience in React, Angular & TypeScript
           </motion.p>
         </motion.div>
 
