@@ -1,0 +1,45 @@
+# =============================================================================
+# INGRESS
+# =============================================================================
+# Налаштовує зовнішній доступ через домени з SSL
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eurusik-app-ingress
+  namespace: eurusik-app
+  annotations:
+    # Traefik конфігурація для HTTP/HTTPS
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Автоматичне отримання SSL сертифікатів від Let's Encrypt
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - eurusik.tech      # Основний домен
+    - www.eurusik.tech  # WWW субдомен
+    secretName: eurusik-tech-tls  # Secret для зберігання SSL сертифікатів
+  rules:
+  # Правило для основного домену
+  - host: eurusik.tech
+    http:
+      paths:
+      - path: /           # Всі шляхи
+        pathType: Prefix  # Префіксне співставлення
+        backend:
+          service:
+            name: eurusik-app-service
+            port:
+              number: 80
+  - host: www.eurusik.tech
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eurusik-app-service
+            port:
+              number: 80

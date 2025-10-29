@@ -1,0 +1,52 @@
+# =============================================================================
+# DEPLOYMENT
+# =============================================================================
+# Управляє подами додатку з автоматичним перезапуском
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurusik-app
+  namespace: eurusik-app
+  labels:
+    app: eurusik-app
+spec:
+  replicas: 2  # Два екземпляри для високої доступності
+  selector:
+    matchLabels:
+      app: eurusik-app
+  template:
+    metadata:
+      labels:
+        app: eurusik-app
+    spec:
+      containers:
+      - name: eurusik-app
+        # Docker образ з GitHub Container Registry
+        # Тег автоматично оновлюється через GitHub Actions
+        image: ghcr.io/eurusik/eurusik:latest
+        imagePullPolicy: Always  # Завжди тягнути новий образ
+        ports:
+        - containerPort: 80  # Nginx слухає на порту 80
+        # Ресурсні обмеження для оптимального використання
+        resources:
+          requests:  # Мінімальні ресурси
+            memory: "64Mi"
+            cpu: "50m"
+          limits:    # Максимальні ресурси
+            memory: "128Mi"
+            cpu: "100m"
+        # Перевірка життєздатності - перезапуск при збоях
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30  # Час на запуск
+          periodSeconds: 10        # Інтервал перевірки
+        # Перевірка готовності - трафік тільки до готових подів
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5   # Швидша перевірка готовності
+          periodSeconds: 5

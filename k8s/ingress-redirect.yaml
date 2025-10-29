@@ -1,0 +1,36 @@
+# =============================================================================
+# INGRESS HTTP REDIRECT
+# =============================================================================
+# Окремий Ingress для HTTP з редиректом на HTTPS
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eurusik-app-ingress-redirect
+  namespace: eurusik-app
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-to-https@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: eurusik.tech
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eurusik-app-service
+            port:
+              number: 80
+  - host: www.eurusik.tech
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eurusik-app-service
+            port:
+              number: 80

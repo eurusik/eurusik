@@ -27,6 +27,10 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Run linter
+      run: npm run lint
+      continue-on-error: true
+
     - name: Build application
       run: npm run build
 
@@ -35,6 +39,7 @@ jobs:
       with:
         name: portfolio-build
         path: dist/
+        retention-days: 7
 
   docker-build-and-push:
     needs: build-and-test
@@ -42,8 +47,11 @@ jobs:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     
     permissions:
-      contents: read
+      contents: write
       packages: write
+
+    outputs:
+      image-tag: ${{ steps.image-tag.outputs.tag }}
 
     steps:
     - name: Checkout repository
@@ -56,15 +64,23 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Generate image tag
+      id: image-tag
+      run: |
+        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+        TAG="${SHORT_SHA}-$(date +%s)"
+        echo "tag=${TAG}" >> $GITHUB_OUTPUT
+        echo "Generated tag: ${TAG}"
+
     - name: Extract metadata
       id: meta
       uses: docker/metadata-action@v5
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
-          type=ref,event=branch
+          type=raw,value=${{ steps.image-tag.outputs.tag }}
+          type=raw,value=latest
           type=sha,prefix={{branch}}-
-          type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -79,3 +95,32 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+  update-k8s-manifest:
+    needs: docker-build-and-push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Update Kubernetes manifest
+      env:
+        IMAGE_TAG: ${{ needs.docker-build-and-push.outputs.image-tag }}
+      run: |
+        sed -i "s|image: ghcr.io/eurusik/eurusik:.*|image: ghcr.io/eurusik/eurusik:${IMAGE_TAG}|g" k8s/deployment.yaml
+        echo "Updated image tag to: ${IMAGE_TAG}"
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add k8s/deployment.yaml
+        git commit -m "chore: update image tag to ${{ needs.docker-build-and-push.outputs.image-tag }}" || echo "No changes to commit"
+        git push || echo "No changes to push"

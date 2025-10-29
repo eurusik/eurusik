@@ -1,0 +1,18 @@
+# =============================================================================
+# SERVICE
+# =============================================================================
+# Забезпечує внутрішню мережеву доступність
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: eurusik-app-service
+  namespace: eurusik-app
+spec:
+  type: ClusterIP     # Внутрішній доступ, зовнішній через Ingress
+  selector:
+    app: eurusik-app   # Підключення до подів з цим лейблом
+  ports:
+  - port: 80           # Зовнішній порт сервісу
+    targetPort: 80     # Порт контейнера
+    protocol: TCP

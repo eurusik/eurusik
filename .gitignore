@@ -93,9 +93,16 @@ jspm_packages/
 tmp/
 temp/
 
-# Deployment files (keep private for security)
-k8s/
-scripts/
-docs/deployment/
+# Kubernetes secrets and configs (keep private for security)
 .kube/
 *.kubeconfig
+k8s/secrets/
+k8s/*-secret.yaml
+
+# Helm values with secrets
+values-secret.yaml
+values.*.secret.yaml
+
+# ArgoCD admin credentials
+argocd/admin-password.txt
+argocd/*-secret.yaml

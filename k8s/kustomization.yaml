@@ -1,0 +1,25 @@
+# =============================================================================
+# KUSTOMIZATION
+# =============================================================================
+# Kustomize конфігурація для управління Kubernetes ресурсами
+# Дозволяє ArgoCD застосовувати всі ресурси разом
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Список всіх ресурсів для розгортання
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - ingress-redirect.yaml
+
+# Загальні лейбли для всіх ресурсів
+commonLabels:
+  app.kubernetes.io/name: eurusik-app
+  app.kubernetes.io/managed-by: argocd
+
+# Загальні анотації
+commonAnnotations:
+  app.kubernetes.io/version: "1.0.0"

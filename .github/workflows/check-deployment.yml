@@ -1,0 +1,47 @@
+name: Check Deployment Status
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Перевіряти кожні 6 годин
+    - cron: '0 */6 * * *'
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Get current image tag from deployment
+      id: current-tag
+      run: |
+        CURRENT_TAG=$(grep "image: ghcr.io/eurusik/eurusik:" k8s/deployment.yaml | awk -F':' '{print $3}')
+        echo "tag=${CURRENT_TAG}" >> $GITHUB_OUTPUT
+        echo "Current deployed tag: ${CURRENT_TAG}"
+
+    - name: Get latest commit
+      id: latest-commit
+      run: |
+        LATEST_SHA=$(git rev-parse HEAD | cut -c1-7)
+        echo "sha=${LATEST_SHA}" >> $GITHUB_OUTPUT
+        echo "Latest commit SHA: ${LATEST_SHA}"
+
+    - name: Check if deployment is up to date
+      run: |
+        if [[ "${{ steps.current-tag.outputs.tag }}" == *"${{ steps.latest-commit.outputs.sha }}"* ]]; then
+          echo "✅ Deployment is up to date"
+        else
+          echo "⚠️ Deployment may be outdated"
+          echo "Current tag: ${{ steps.current-tag.outputs.tag }}"
+          echo "Latest commit: ${{ steps.latest-commit.outputs.sha }}"
+        fi
+
+    - name: Summary
+      run: |
+        echo "## 📊 Deployment Status" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Current Image Tag**: \`${{ steps.current-tag.outputs.tag }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **Latest Commit**: \`${{ steps.latest-commit.outputs.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **Repository**: eurusik/eurusik" >> $GITHUB_STEP_SUMMARY

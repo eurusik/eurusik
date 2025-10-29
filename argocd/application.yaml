@@ -1,0 +1,57 @@
+# =============================================================================
+# ARGOCD APPLICATION
+# =============================================================================
+# Конфігурація ArgoCD для автоматичного розгортання eurusik.tech
+#
+# Застосувати цей файл:
+# kubectl apply -f argocd/application.yaml
+#
+# Переглянути статус:
+# kubectl get application eurusik-app -n argocd
+# argocd app get eurusik-app
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eurusik-app
+  namespace: argocd  # ArgoCD Application ресурси живуть у namespace argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io  # Очищення ресурсів при видаленні
+spec:
+  # Цільовий кластер та namespace
+  destination:
+    namespace: eurusik-app
+    server: https://kubernetes.default.svc  # Локальний кластер
+  
+  # Джерело конфігурації (Git репозиторій)
+  source:
+    repoURL: https://github.com/eurusik/eurusik.git
+    targetRevision: main  # Гілка для відстеження
+    path: k8s             # Шлях до Kubernetes маніфестів
+  
+  # Політика синхронізації
+  syncPolicy:
+    # Автоматична синхронізація при змінах у Git
+    automated:
+      prune: true       # Видаляти ресурси, які видалені з Git
+      selfHeal: true    # Автоматично виправляти дрейф конфігурації
+      allowEmpty: false # Не дозволяти порожні коміти
+    
+    # Опції синхронізації
+    syncOptions:
+    - CreateNamespace=true  # Автоматично створювати namespace якщо не існує
+    - PruneLast=true        # Видаляти ресурси останніми
+    
+    # Retry стратегія при помилках
+    retry:
+      limit: 5              # Максимум 5 спроб
+      backoff:
+        duration: 5s        # Початкова затримка
+        factor: 2           # Множник для експоненційного зростання
+        maxDuration: 3m     # Максимальна затримка
+  
+  # Налаштування проекту ArgoCD
+  project: default  # Використовувати default project або створіть окремий
+  
+  # Додаткові налаштування
+  revisionHistoryLimit: 10  # Зберігати останні 10 ревізій
