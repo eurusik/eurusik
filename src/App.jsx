@@ -1,10 +1,12 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
+import Blog from './components/Blog'
 import Companies from './components/Companies'
 import Experience from './components/Experience'
 import Skills from './components/Skills'
 import Education from './components/Education'
+import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 
 function App() {
@@ -14,10 +16,12 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Blog />
         <Companies />
         <Experience />
         <Skills />
         <Education />
+        <Testimonials />
         <Contact />
       </main>
     </div>
