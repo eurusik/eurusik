@@ -25,7 +25,7 @@ export default function Head() {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="en_US" />
-      <meta property="og:site_name" content="Eugene Rusakov Portfolio" />
+      <meta property="og:site_name" content="Eugene Rusakov" />
       
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
