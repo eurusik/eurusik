@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, MapPin, Send } from 'lucide-react'
 
@@ -41,10 +40,10 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-poppins">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
+            Ready to bring your ideas to life? Let&apos;s discuss your next project and create something amazing together.
           </p>
         </motion.div>
 

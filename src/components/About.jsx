@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 
 const About = () => {
@@ -26,7 +25,7 @@ const About = () => {
         >
           <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-inter">
             <span className="font-semibold text-blue-600">11+ years of experience</span> building scalable web applications 
-            for Ukraine's leading tech companies. Maintaining <span className="font-semibold text-purple-600">Angular Primitives</span>{' '}
+            for Ukraine&apos;s leading tech companies. Maintaining <span className="font-semibold text-purple-600">Angular Primitives</span>{' '}
             and leading frontend development at <span className="font-semibold text-indigo-600">Сільпо</span>. 
             Expert in <span className="font-semibold">Angular</span>, <span className="font-semibold">TypeScript</span>,{' '}
             <span className="font-semibold">React</span>, and <span className="font-semibold">microservices architecture</span>,{' '}
