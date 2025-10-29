@@ -90,7 +90,6 @@ const Blog = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
-                whileHover={{ y: -5, scale: 1.02 }}
               >
                 <a
                   href={article.link}
@@ -104,13 +103,13 @@ const Blog = () => {
                         <img
                           src={article.thumbnail}
                           alt={article.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="w-full h-full object-cover transition-transform duration-300"
                           onError={() => handleImageError(index)}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                       </>
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center transition-transform duration-300">
                         <BookOpen size={48} className="text-white/80" />
                       </div>
                     )}
@@ -143,9 +142,9 @@ const Blog = () => {
                       </div>
                     )}
 
-                    <div className="flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+                    <div className="flex items-center gap-2 text-blue-600 font-semibold transition-all">
                       <span>Read more</span>
-                      <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
+                      <ExternalLink size={16} className="transition-transform" />
                     </div>
                   </div>
                 </a>
