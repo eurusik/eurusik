@@ -78,6 +78,7 @@ export default function Head() {
           "sameAs": [
             "https://github.com/eurusik",
             "https://www.linkedin.com/in/eugene-rusakov-27606352/",
+            "https://dou.ua/users/john-rusakov/",
             "https://medium.com/@eurusik",
             "https://www.threads.net/@eurusik"
           ]
