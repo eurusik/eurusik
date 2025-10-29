@@ -26,8 +26,8 @@ FROM nginx:alpine
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy built application
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy built application from Vike
+COPY --from=build /app/dist/client /usr/share/nginx/html
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
