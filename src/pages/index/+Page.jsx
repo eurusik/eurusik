@@ -6,6 +6,7 @@ import Companies from '../../components/Companies'
 import Experience from '../../components/Experience'
 import Skills from '../../components/Skills'
 import Education from '../../components/Education'
+import GitHubActivity from '../../components/GitHubActivity'
 import Testimonials from '../../components/Testimonials'
 import Contact from '../../components/Contact'
 
@@ -21,6 +22,7 @@ export default function Page() {
         <Experience />
         <Skills />
         <Education />
+        <GitHubActivity />
         <Testimonials />
         <Contact />
       </main>

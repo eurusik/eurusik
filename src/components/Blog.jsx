@@ -59,7 +59,7 @@ const Blog = () => {
   }
 
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/30">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/30" aria-labelledby="blog-heading">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -68,7 +68,7 @@ const Blog = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-poppins">
+          <h2 id="blog-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-poppins">
             Latest Articles
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -81,7 +81,7 @@ const Blog = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list" aria-label="Blog articles">
             {articles.map((article, index) => (
               <motion.article
                 key={index}

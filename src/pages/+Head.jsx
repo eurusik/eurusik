@@ -10,8 +10,8 @@ export default function Head() {
       {/* Primary Meta Tags */}
       <title>Eugene Rusakov - Senior Frontend Developer | React, Angular, TypeScript Expert</title>
       <meta name="title" content="Eugene Rusakov - Senior Frontend Developer | React, Angular, TypeScript Expert" />
-      <meta name="description" content="Senior Frontend Developer with 11+ years of experience. Specialized in React, Angular, TypeScript, and modern web technologies. Former EA, Mastercard, Rozetka engineer." />
-      <meta name="keywords" content="Eugene Rusakov, Frontend Developer, React Developer, Angular Developer, TypeScript, JavaScript, Web Development, Software Engineer, Ukraine, Kyiv" />
+      <meta name="description" content="Senior Frontend Developer with 11+ years of experience. Specialized in React, Angular, TypeScript. Tech blog on Medium, active GitHub contributor. Former EA, Mastercard, Rozetka engineer." />
+      <meta name="keywords" content="Eugene Rusakov, Frontend Developer, React Developer, Angular Developer, TypeScript, JavaScript, Web Development, Software Engineer, Ukraine, Kyiv, GitHub, Medium Blog, Open Source" />
       <meta name="author" content="Eugene Rusakov" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://eurusik.tech/" />
@@ -20,7 +20,7 @@ export default function Head() {
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://eurusik.tech/" />
       <meta property="og:title" content="Eugene Rusakov - Senior Frontend Developer | React, Angular, TypeScript Expert" />
-      <meta property="og:description" content="Senior Frontend Developer with 11+ years of experience. Specialized in React, Angular, TypeScript, and modern web technologies. Former EA, Mastercard, Rozetka engineer." />
+      <meta property="og:description" content="Senior Frontend Developer with 11+ years of experience. Specialized in React, Angular, TypeScript. Tech blog on Medium, active GitHub contributor. Former EA, Mastercard, Rozetka engineer." />
       <meta property="og:image" content="https://eurusik.tech/og-image.svg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -31,7 +31,7 @@ export default function Head() {
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://eurusik.tech/" />
       <meta property="twitter:title" content="Eugene Rusakov - Senior Frontend Developer | React, Angular, TypeScript Expert" />
-      <meta property="twitter:description" content="Senior Frontend Developer with 11+ years of experience. Specialized in React, Angular, TypeScript, and modern web technologies." />
+      <meta property="twitter:description" content="Senior Frontend Developer with 11+ years of experience. Tech blog on Medium, active GitHub contributor. Specialized in React, Angular, TypeScript." />
       <meta property="twitter:image" content="https://eurusik.tech/og-image.svg" />
       
       {/* Additional SEO */}
@@ -73,7 +73,9 @@ export default function Head() {
             "JavaScript",
             "Frontend Development",
             "Web Development",
-            "Software Engineering"
+            "Software Engineering",
+            "Technical Writing",
+            "Open Source"
           ],
           "sameAs": [
             "https://github.com/eurusik",
@@ -101,6 +103,52 @@ export default function Head() {
             "@type": "SearchAction",
             "target": "https://eurusik.tech/#about",
             "query-input": "required name=search_term_string"
+          }
+        })
+      }} />
+      {/* ProfilePage Schema for Enhanced SEO */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "dateCreated": "2025-10-29T00:00:00+00:00",
+          "dateModified": "2025-10-29T00:00:00+00:00",
+          "mainEntity": {
+            "@type": "Person",
+            "name": "Eugene Rusakov",
+            "alternateName": "eurusik",
+            "identifier": "eurusik",
+            "description": "Senior Frontend Developer with 11+ years of experience",
+            "image": "https://eurusik.tech/avatar.jpg",
+            "sameAs": [
+              "https://github.com/eurusik",
+              "https://medium.com/@eurusik",
+              "https://www.linkedin.com/in/eugene-rusakov-27606352/"
+            ]
+          }
+        })
+      }} />
+      
+      {/* Blog Schema for Medium Articles */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "Eugene Rusakov's Tech Blog",
+          "description": "Articles about frontend development, React, Angular, and modern web technologies",
+          "url": "https://medium.com/@eurusik",
+          "author": {
+            "@type": "Person",
+            "name": "Eugene Rusakov",
+            "url": "https://eurusik.tech"
+          },
+          "blogPost": {
+            "@type": "BlogPosting",
+            "headline": "Frontend Development Insights",
+            "author": {
+              "@type": "Person",
+              "name": "Eugene Rusakov"
+            }
           }
         })
       }} />
