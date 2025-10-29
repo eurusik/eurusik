@@ -9,6 +9,7 @@ import Education from '../../components/Education'
 import GitHubActivity from '../../components/GitHubActivity'
 import Testimonials from '../../components/Testimonials'
 import Contact from '../../components/Contact'
+import BackToTop from '../../components/BackToTop'
 
 export default function Page() {
   return (
@@ -26,6 +27,7 @@ export default function Page() {
         <Testimonials />
         <Contact />
       </main>
+      <BackToTop />
     </div>
   )
 }
