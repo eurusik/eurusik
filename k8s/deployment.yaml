@@ -24,7 +24,7 @@ spec:
       - name: eurusik-app
         # Docker образ з GitHub Container Registry
         # Тег автоматично оновлюється через GitHub Actions
-        image: ghcr.io/eurusik/eurusik:45847a6-1761740344
+        image: ghcr.io/eurusik/eurusik:bb4fde7-1761740561
         imagePullPolicy: Always  # Завжди тягнути новий образ
         ports:
         - containerPort: 80  # Nginx слухає на порту 80
