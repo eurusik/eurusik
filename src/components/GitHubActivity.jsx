@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Github, GitBranch, GitCommit, GitPullRequest, Star, GitFork, Code, BookMarked } from 'lucide-react'
+import { Github, GitBranch, GitCommit, GitPullRequest, Star, GitFork, Code, BookMarked, Activity } from 'lucide-react'
 
 const GitHubActivity = () => {
   const [events, setEvents] = useState([])
+  const [contributions, setContributions] = useState([])
   const [stats, setStats] = useState({ repos: 0, totalCommits: 0, followers: 0 })
+  const [contribStats, setContribStats] = useState({ total: 0, max: 0, streak: 0 })
   const [loading, setLoading] = useState(true)
   const username = 'eurusik'
 
   useEffect(() => {
-    fetchGitHubData()
+    fetchAllGitHubData()
   }, [])
 
-  const fetchGitHubData = async () => {
+  const fetchAllGitHubData = async () => {
     try {
-      // Fetch events
       const eventsResponse = await fetch(
         `https://api.github.com/users/${username}/events/public?per_page=100`
       )
@@ -23,16 +24,14 @@ const GitHubActivity = () => {
       
       const eventsData = await eventsResponse.json()
       
-      // Фільтруємо та беремо події з контентом
+      // Process recent activity
       const validEvents = eventsData.filter(event => {
-        // Skip empty push events
         if (event.type === 'PushEvent' && (!event.payload.commits || event.payload.commits.length === 0)) {
           return false
         }
         return true
       })
       
-      // Беремо останні 4 події
       const formattedEvents = validEvents.slice(0, 4).map(event => ({
         id: event.id,
         type: event.type,
@@ -43,23 +42,48 @@ const GitHubActivity = () => {
       
       setEvents(formattedEvents)
 
+      // Process contributions for graph
+      const contributionMap = new Map()
+      const today = new Date()
+      const oneYearAgo = new Date(today)
+      oneYearAgo.setFullYear(today.getFullYear() - 1)
+      
+      for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
+        const dateStr = d.toISOString().split('T')[0]
+        contributionMap.set(dateStr, 0)
+      }
+      
+      eventsData.forEach(event => {
+        const date = new Date(event.created_at).toISOString().split('T')[0]
+        if (contributionMap.has(date)) {
+          contributionMap.set(date, contributionMap.get(date) + 1)
+        }
+      })
+      
+      const contributionsArray = Array.from(contributionMap, ([date, count]) => ({
+        date,
+        count
+      })).sort((a, b) => new Date(a.date) - new Date(b.date))
+      
+      const total = contributionsArray.reduce((sum, day) => sum + day.count, 0)
+      const max = Math.max(...contributionsArray.map(day => day.count))
+      
+      setContributions(contributionsArray)
+      setContribStats({ total, max, streak: calculateStreak(contributionsArray) })
+
       // Fetch user stats
       const userResponse = await fetch(`https://api.github.com/users/${username}`)
       if (userResponse.ok) {
         const userData = await userResponse.json()
         
-        // Calculate commits from push events
         const pushEvents = eventsData.filter(e => e.type === 'PushEvent')
         const totalCommits = pushEvents.reduce((sum, event) => 
           sum + (event.payload.commits?.length || 0), 0
         )
         
-        // Count different event types for activity metric
-        const activityCount = eventsData.slice(0, 30).length
-        
         setStats({
           repos: userData.public_repos,
-          totalCommits: totalCommits > 0 ? totalCommits : activityCount,
+          totalCommits: totalCommits > 0 ? totalCommits : eventsData.slice(0, 30).length,
           followers: userData.followers
         })
       }
@@ -68,6 +92,21 @@ const GitHubActivity = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+  const calculateStreak = (contribs) => {
+    let currentStreak = 0
+    const reversed = [...contribs].reverse()
+    
+    for (const day of reversed) {
+      if (day.count > 0) {
+        currentStreak++
+      } else if (currentStreak > 0) {
+        break
+      }
+    }
+    
+    return currentStreak
   }
 
   const getEventIcon = (type) => {
@@ -91,7 +130,7 @@ const GitHubActivity = () => {
     switch (event.type) {
       case 'PushEvent':
         const commits = event.payload.commits?.length || 0
-        if (commits === 0) return null // Skip empty pushes
+        if (commits === 0) return null
         return `Pushed ${commits} commit${commits !== 1 ? 's' : ''}`
       case 'PullRequestEvent':
         return `${event.payload.action?.charAt(0).toUpperCase() + event.payload.action?.slice(1) || 'Updated'} pull request`
@@ -103,10 +142,6 @@ const GitHubActivity = () => {
         return 'Forked repository'
       case 'IssuesEvent':
         return `${event.payload.action?.charAt(0).toUpperCase() + event.payload.action?.slice(1) || 'Updated'} issue`
-      case 'IssueCommentEvent':
-        return 'Commented on issue'
-      case 'PullRequestReviewEvent':
-        return 'Reviewed pull request'
       default:
         return event.type.replace('Event', '')
     }
@@ -123,6 +158,51 @@ const GitHubActivity = () => {
     if (days < 7) return `${days}d ago`
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
+
+  const getColorIntensity = (count) => {
+    if (count === 0) return 'bg-gray-200'
+    if (count === 1) return 'bg-green-200'
+    if (count <= 3) return 'bg-green-400'
+    if (count <= 5) return 'bg-green-600'
+    return 'bg-green-700'
+  }
+
+  const getTooltipText = (date, count) => {
+    const dateObj = new Date(date)
+    const formattedDate = dateObj.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      year: 'numeric'
+    })
+    return `${count} contribution${count !== 1 ? 's' : ''} on ${formattedDate}`
+  }
+
+  const groupByWeeks = (contribs) => {
+    const weeks = []
+    let week = []
+    
+    contribs.forEach((day, index) => {
+      const dayOfWeek = new Date(day.date).getDay()
+      
+      if (index === 0 && dayOfWeek !== 0) {
+        for (let i = 0; i < dayOfWeek; i++) {
+          week.push(null)
+        }
+      }
+      
+      week.push(day)
+      
+      if (dayOfWeek === 6 || index === contribs.length - 1) {
+        weeks.push([...week])
+        week = []
+      }
+    })
+    
+    return weeks
+  }
+
+  const weeks = groupByWeeks(contributions)
+  const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   return (
     <section id="github-activity" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/30" aria-labelledby="github-heading">
@@ -179,13 +259,13 @@ const GitHubActivity = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm font-medium mb-1">Recent Commits</p>
+                    <p className="text-gray-600 text-sm font-medium mb-1">Year Contributions</p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                      {stats.totalCommits}
+                      {contribStats.total}
                     </p>
                   </div>
                   <div className="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl">
-                    <GitCommit className="text-white" size={24} />
+                    <Activity className="text-white" size={24} />
                   </div>
                 </div>
               </motion.div>
@@ -199,13 +279,13 @@ const GitHubActivity = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm font-medium mb-1">Followers</p>
+                    <p className="text-gray-600 text-sm font-medium mb-1">Current Streak</p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      {stats.followers}
+                      {contribStats.streak} days
                     </p>
                   </div>
                   <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
-                    <Star className="text-white" size={24} />
+                    <Github className="text-white" size={24} />
                   </div>
                 </div>
               </motion.div>
@@ -223,7 +303,7 @@ const GitHubActivity = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4" role="list" aria-label="GitHub recent activities">
                 {events.map((event, index) => {
                   const description = getEventDescription(event)
-                  if (!description) return null // Skip events without description
+                  if (!description) return null
                   
                   return (
                     <motion.div
@@ -261,6 +341,87 @@ const GitHubActivity = () => {
                     </motion.div>
                   )
                 })}
+              </div>
+            </motion.div>
+
+            {/* Contribution Graph */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mb-12"
+            >
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Contribution Graph</h3>
+              <div className="glass-card rounded-2xl p-4 md:p-6 bg-gradient-to-br from-white/80 to-gray-50/80 border border-gray-200 overflow-hidden">
+                {/* Custom scrollbar styling */}
+                <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+                  <div className="min-w-max md:min-w-0 md:w-full">
+                    {/* Month labels */}
+                    <div className="flex gap-1 md:gap-1 mb-2 md:mb-2 ml-7 md:ml-8">
+                      {monthLabels.map((month, i) => (
+                        <div key={month} className="text-[10px] md:text-xs text-gray-500 font-medium w-9 md:flex-1 md:min-w-0">
+                          {i % 2 === 0 ? month : ''}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-1 md:gap-1">
+                      {/* Day labels */}
+                      <div className="flex flex-col gap-1 md:gap-1 text-[10px] md:text-xs text-gray-500 font-medium mr-1 md:mr-2">
+                        <div className="h-2.5 md:h-3"></div>
+                        <div className="h-2.5 md:h-3">Mon</div>
+                        <div className="h-2.5 md:h-3"></div>
+                        <div className="h-2.5 md:h-3">Wed</div>
+                        <div className="h-2.5 md:h-3"></div>
+                        <div className="h-2.5 md:h-3">Fri</div>
+                        <div className="h-2.5 md:h-3"></div>
+                      </div>
+
+                      {/* Contribution squares */}
+                      <div className="flex gap-1 md:gap-1 md:flex-1">
+                        {weeks.map((week, weekIndex) => (
+                          <div key={weekIndex} className="flex flex-col gap-1 md:gap-1 md:flex-1">
+                            {week.map((day, dayIndex) => (
+                              <div
+                                key={`${weekIndex}-${dayIndex}`}
+                                className="group relative"
+                              >
+                                {day ? (
+                                  <>
+                                    <div
+                                      className={`w-2.5 h-2.5 md:w-full md:aspect-square rounded-sm ${getColorIntensity(day.count)} transition-all duration-200 hover:ring-1 md:hover:ring-2 hover:ring-blue-500 cursor-pointer shadow-sm`}
+                                      title={getTooltipText(day.date, day.count)}
+                                    />
+                                    {/* Tooltip - hidden on mobile */}
+                                    <div className="hidden md:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10 shadow-lg">
+                                      {getTooltipText(day.date, day.count)}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div className="w-2.5 h-2.5 md:w-full md:aspect-square" />
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Legend */}
+                    <div className="flex items-center gap-2 md:gap-2 mt-4 md:mt-4 text-[10px] md:text-xs text-gray-600 font-medium">
+                      <span>Less</span>
+                      <div className="flex gap-1 md:gap-1">
+                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-gray-200 shadow-sm"></div>
+                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-200 shadow-sm"></div>
+                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-400 shadow-sm"></div>
+                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-600 shadow-sm"></div>
+                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-700 shadow-sm"></div>
+                      </div>
+                      <span>More</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
