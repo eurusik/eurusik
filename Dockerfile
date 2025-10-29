@@ -1,5 +1,5 @@
 # Build stage
-FROM --platform=$BUILDPLATFORM node:18-alpine AS build
+FROM --platform=$BUILDPLATFORM node:20-alpine AS build
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
