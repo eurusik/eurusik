@@ -8,8 +8,8 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-hero-gradient opacity-90"></div>
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 animated-gradient opacity-90"></div>
       
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -53,15 +53,47 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-8 relative"
           >
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl">
+            {/* Animated gradient border */}
+            <motion.div 
+              className="w-full h-full rounded-full p-1 shadow-2xl"
+              animate={{
+                background: [
+                  'linear-gradient(0deg, #667eea, #764ba2)',
+                  'linear-gradient(120deg, #764ba2, #f093fb)',
+                  'linear-gradient(240deg, #f093fb, #4facfe)',
+                  'linear-gradient(360deg, #4facfe, #667eea)',
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'linear'
+              }}
+            >
               <img 
                 src="/avatar.jpg" 
                 alt="Eugene Rusakov - Senior Frontend Developer"
                 className="w-full h-full rounded-full object-cover"
                 loading="eager"
               />
-            </div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-600/20 blur-xl"></div>
+            </motion.div>
+            {/* Animated glow */}
+            <motion.div 
+              className="absolute inset-0 rounded-full blur-xl"
+              animate={{
+                background: [
+                  'radial-gradient(circle, rgba(102, 126, 234, 0.3), transparent)',
+                  'radial-gradient(circle, rgba(118, 75, 162, 0.3), transparent)',
+                  'radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent)',
+                  'radial-gradient(circle, rgba(79, 172, 254, 0.3), transparent)',
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'linear'
+              }}
+            />
           </motion.div>
 
           {/* Main Heading - H1 for SEO */}

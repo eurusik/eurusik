@@ -45,10 +45,10 @@ const GitHubActivity = () => {
       // Process contributions for graph
       const contributionMap = new Map()
       const today = new Date()
-      const oneYearAgo = new Date(today)
-      oneYearAgo.setFullYear(today.getFullYear() - 1)
+      const startOfYear = new Date(today.getFullYear(), 0, 1) // 1 січня поточного року
       
-      for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
+      // Initialize all days from start of year to today
+      for (let d = new Date(startOfYear); d <= today; d.setDate(d.getDate() + 1)) {
         const dateStr = d.toISOString().split('T')[0]
         contributionMap.set(dateStr, 0)
       }
