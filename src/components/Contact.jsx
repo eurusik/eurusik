@@ -31,7 +31,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900" aria-labelledby="contact-heading">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -40,7 +40,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-poppins">
+          <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-poppins">
             Let's Work Together
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">

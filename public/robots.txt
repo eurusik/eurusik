@@ -1,0 +1,6 @@
+# robots.txt for eurusik.tech
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://eurusik.tech/sitemap.xml
