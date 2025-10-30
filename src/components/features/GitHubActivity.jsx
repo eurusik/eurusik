@@ -1,113 +1,10 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Github, GitBranch, GitCommit, GitPullRequest, Star, GitFork, Code, BookMarked, Activity } from 'lucide-react'
+import { useGitHubActivity } from '../../hooks'
+import { GITHUB_CONFIG } from '../../config'
 
 const GitHubActivity = () => {
-  const [events, setEvents] = useState([])
-  const [contributions, setContributions] = useState([])
-  const [stats, setStats] = useState({ repos: 0, totalCommits: 0, followers: 0 })
-  const [contribStats, setContribStats] = useState({ total: 0, max: 0, streak: 0 })
-  const [loading, setLoading] = useState(true)
-  const username = 'eurusik'
-
-  useEffect(() => {
-    fetchAllGitHubData()
-  }, [])
-
-  const fetchAllGitHubData = async () => {
-    try {
-      const eventsResponse = await fetch(
-        `https://api.github.com/users/${username}/events/public?per_page=100`
-      )
-      
-      if (!eventsResponse.ok) throw new Error('Failed to fetch GitHub activity')
-      
-      const eventsData = await eventsResponse.json()
-      
-      // Process recent activity
-      const validEvents = eventsData.filter(event => {
-        if (event.type === 'PushEvent' && (!event.payload.commits || event.payload.commits.length === 0)) {
-          return false
-        }
-        return true
-      })
-      
-      const formattedEvents = validEvents.slice(0, 4).map(event => ({
-        id: event.id,
-        type: event.type,
-        repo: event.repo.name,
-        createdAt: new Date(event.created_at),
-        payload: event.payload
-      }))
-      
-      setEvents(formattedEvents)
-
-      // Process contributions for graph
-      const contributionMap = new Map()
-      const today = new Date()
-      const startOfYear = new Date(today.getFullYear(), 0, 1) // 1 січня поточного року
-      
-      // Initialize all days from start of year to today
-      for (let d = new Date(startOfYear); d <= today; d.setDate(d.getDate() + 1)) {
-        const dateStr = d.toISOString().split('T')[0]
-        contributionMap.set(dateStr, 0)
-      }
-      
-      eventsData.forEach(event => {
-        const date = new Date(event.created_at).toISOString().split('T')[0]
-        if (contributionMap.has(date)) {
-          contributionMap.set(date, contributionMap.get(date) + 1)
-        }
-      })
-      
-      const contributionsArray = Array.from(contributionMap, ([date, count]) => ({
-        date,
-        count
-      })).sort((a, b) => new Date(a.date) - new Date(b.date))
-      
-      const total = contributionsArray.reduce((sum, day) => sum + day.count, 0)
-      const max = Math.max(...contributionsArray.map(day => day.count))
-      
-      setContributions(contributionsArray)
-      setContribStats({ total, max, streak: calculateStreak(contributionsArray) })
-
-      // Fetch user stats
-      const userResponse = await fetch(`https://api.github.com/users/${username}`)
-      if (userResponse.ok) {
-        const userData = await userResponse.json()
-        
-        const pushEvents = eventsData.filter(e => e.type === 'PushEvent')
-        const totalCommits = pushEvents.reduce((sum, event) => 
-          sum + (event.payload.commits?.length || 0), 0
-        )
-        
-        setStats({
-          repos: userData.public_repos,
-          totalCommits: totalCommits > 0 ? totalCommits : eventsData.slice(0, 30).length,
-          followers: userData.followers
-        })
-      }
-    } catch (err) {
-      console.error('Error fetching GitHub data:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const calculateStreak = (contribs) => {
-    let currentStreak = 0
-    const reversed = [...contribs].reverse()
-    
-    for (const day of reversed) {
-      if (day.count > 0) {
-        currentStreak++
-      } else if (currentStreak > 0) {
-        break
-      }
-    }
-    
-    return currentStreak
-  }
+  const { events, contributions, stats, contribStats, loading } = useGitHubActivity()
 
   const getEventIcon = (type) => {
     switch (type) {
@@ -128,10 +25,11 @@ const GitHubActivity = () => {
 
   const getEventDescription = (event) => {
     switch (event.type) {
-      case 'PushEvent':
+      case 'PushEvent': {
         const commits = event.payload.commits?.length || 0
         if (commits === 0) return null
         return `Pushed ${commits} commit${commits !== 1 ? 's' : ''}`
+      }
       case 'PullRequestEvent':
         return `${event.payload.action?.charAt(0).toUpperCase() + event.payload.action?.slice(1) || 'Updated'} pull request`
       case 'CreateEvent':
@@ -434,7 +332,7 @@ const GitHubActivity = () => {
               className="text-center"
             >
               <a
-                href={`https://github.com/${username}`}
+                href={`https://github.com/${GITHUB_CONFIG.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition-shadow duration-300"

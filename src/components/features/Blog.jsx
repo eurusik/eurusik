@@ -1,59 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { BookOpen, ExternalLink, Calendar } from 'lucide-react'
-import MediumIcon from './MediumIcon'
+import { MediumIcon } from '../ui/icons'
+import { MEDIUM_CONFIG } from '../../config'
+import { useMediumArticles } from '../../hooks'
 
 const Blog = () => {
-  const [articles, setArticles] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { articles, loading } = useMediumArticles()
   const [imageErrors, setImageErrors] = useState({})
-
-  useEffect(() => {
-    fetchMediumArticles()
-  }, [])
-
-  const fetchMediumArticles = async () => {
-    try {
-      const RSS_URL = 'https://medium.com/feed/@eurusik'
-      const response = await fetch(
-        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`
-      )
-      
-      const data = await response.json()
-      
-      if (data.status === 'ok') {
-        const formattedArticles = data.items.slice(0, 3).map(item => ({
-          title: item.title,
-          link: item.link,
-          pubDate: new Date(item.pubDate).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          }),
-          description: item.description
-            .replace(/<[^>]+>/g, '')
-            .substring(0, 120) + '...',
-          thumbnail: item.thumbnail || extractImageFromContent(item.content),
-          categories: item.categories?.slice(0, 2) || []
-        }))
-        
-        setArticles(formattedArticles)
-      }
-    } catch (err) {
-      console.error('Error fetching Medium articles:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const extractImageFromContent = (content) => {
-    const imgMatch = content?.match(/<img[^>]+src="([^"'>]+)"/);
-    const imgUrl = imgMatch ? imgMatch[1] : null;
-    if (imgUrl && !imgUrl.includes('stat?event') && !imgUrl.includes('&amp;')) {
-      return imgUrl;
-    }
-    return null;
-  }
 
   const handleImageError = (index) => {
     setImageErrors(prev => ({ ...prev, [index]: true }))
@@ -163,7 +117,7 @@ const Blog = () => {
             className="text-center mt-12"
           >
             <a
-              href="https://medium.com/@eurusik"
+              href={MEDIUM_CONFIG.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
