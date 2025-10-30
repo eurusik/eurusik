@@ -42,7 +42,13 @@
     "title": "Навички та технології"
   },
   "education": {
-    "title": "Освіта"
+    "title": "Освіта",
+    "degree": "Бакалавр комп'ютерних наук",
+    "institution": "Харківський соціально-економічний інститут",
+    "period": "2013 - 2017",
+    "description": "Фокус на програмній інженерії, алгоритмах та основах веб-розробки.",
+    "certifications": "Сертифікати",
+    "viewCertificate": "Переглянути сертифікат"
   },
   "github": {
     "title": "GitHub активність",
@@ -52,12 +58,12 @@
     "viewProfile": "Переглянути повний GitHub профіль",
     "stats": {
       "repos": "Публічні репозиторії",
-      "yearContributions": "Річні внески",
+      "yearContributions": "Внесків за рік",
       "currentStreak": "Поточна серія",
       "days": "днів"
     },
     "recentActivity": "Остання активність",
-    "contributionGraph": "Графік внесків",
+    "contributionGraph": "Графік активності",
     "less": "Менше",
     "more": "Більше",
     "events": {

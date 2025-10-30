@@ -6,10 +6,10 @@ const Education = () => {
   const { t } = useTranslation()
   
   const education = {
-    institution: "Kharkiv Social and Economic Institute",
-    degree: "Bachelor's Degree in Computer Science",
-    period: "2013 - 2017",
-    description: "Focused on software engineering, algorithms, and web development fundamentals."
+    institution: t('education.institution'),
+    degree: t('education.degree'),
+    period: t('education.period'),
+    description: t('education.description')
   }
 
   const certifications = [
@@ -135,7 +135,7 @@ const Education = () => {
           <div className="flex items-center justify-center gap-3 mb-12">
             <Award className="text-purple-600" size={32} />
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-800">
-              Professional Certifications
+              {t('education.certifications')}
             </h3>
           </div>
 
@@ -181,13 +181,10 @@ const Education = () => {
                       </div>
                     )}
 
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors duration-300"
-                    >
+                    <div className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors duration-300">
                       <ExternalLink size={16} />
-                      <span className="text-sm font-medium">View Certificate</span>
-                    </motion.div>
+                      <span className="text-sm font-medium">{t('education.viewCertificate')}</span>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -234,13 +231,10 @@ const Education = () => {
                     </div>
                   )}
 
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors duration-300"
-                  >
+                  <div className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors duration-300">
                     <ExternalLink size={16} />
-                    <span className="text-sm font-medium">View Certificate</span>
-                  </motion.div>
+                    <span className="text-sm font-medium">{t('education.viewCertificate')}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}

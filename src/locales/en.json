@@ -42,7 +42,13 @@
     "title": "Skills & Technologies"
   },
   "education": {
-    "title": "Education"
+    "title": "Education",
+    "degree": "Bachelor's Degree in Computer Science",
+    "institution": "Kharkiv Social and Economic Institute",
+    "period": "2013 - 2017",
+    "description": "Focused on software engineering, algorithms, and web development fundamentals.",
+    "certifications": "Professional Certifications",
+    "viewCertificate": "View Certificate"
   },
   "github": {
     "title": "GitHub Activity",
