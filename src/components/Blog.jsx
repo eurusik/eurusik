@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { BookOpen, ExternalLink, Calendar } from 'lucide-react'
+import MediumIcon from './MediumIcon'
 
 const Blog = () => {
   const [articles, setArticles] = useState([])
@@ -167,7 +168,7 @@ const Blog = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
             >
-              <BookOpen size={20} />
+              <MediumIcon size={20} />
               <span>View All Articles on Medium</span>
               <ExternalLink size={16} />
             </a>
