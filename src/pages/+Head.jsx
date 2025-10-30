@@ -43,14 +43,9 @@ export default function Head() {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link 
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" 
-        rel="stylesheet" 
-        media="print" 
-        onLoad="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" 
+        rel="stylesheet"
       />
-      <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-      </noscript>
       
       {/* Structured Data (JSON-LD) */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{

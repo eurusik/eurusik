@@ -38,7 +38,7 @@ const Companies = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-4 font-poppins">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-4 font-heading">
             Trusted by Leading Companies
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -76,7 +76,7 @@ const Companies = () => {
                         className="w-14 h-14 object-contain"
                       />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 font-poppins group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="text-lg font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">
                       {company.name}
                     </h3>
                     <p className="text-gray-600 text-sm">
@@ -117,7 +117,7 @@ const Companies = () => {
                       className="w-16 h-16 object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2 font-poppins group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">
                     {company.name}
                   </h3>
                   <p className="text-gray-600 text-sm">

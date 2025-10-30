@@ -39,7 +39,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-poppins">
+          <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-heading">
             Let&apos;s Work Together
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">

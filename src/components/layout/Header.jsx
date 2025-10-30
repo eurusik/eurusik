@@ -39,7 +39,7 @@ const Header = () => {
           >
             <a 
               href="#" 
-              className={`text-xl sm:text-2xl font-bold font-poppins transition-colors duration-300 ${
+              className={`text-xl sm:text-2xl font-bold font-heading transition-colors duration-300 ${
                 scrolled ? 'text-gray-900' : 'text-white'
               }`}
             >

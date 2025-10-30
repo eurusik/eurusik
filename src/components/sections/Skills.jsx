@@ -32,7 +32,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-poppins">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
             Skills & Technologies
           </h2>
         </motion.div>

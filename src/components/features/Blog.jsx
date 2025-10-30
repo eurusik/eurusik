@@ -23,7 +23,7 @@ const Blog = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 id="blog-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-poppins">
+          <h2 id="blog-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-heading">
             Latest Articles
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">

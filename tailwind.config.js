@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'heading': ['Manrope', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
-        'poppins': ['Poppins', 'sans-serif'],
+        'manrope': ['Manrope', 'sans-serif'],
       },
       colors: {
         primary: {

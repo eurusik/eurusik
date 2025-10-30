@@ -11,7 +11,7 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 id="about-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-poppins">
+          <h2 id="about-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
             About Me
           </h2>
         </motion.div>

@@ -39,7 +39,7 @@ const Testimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-poppins">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-heading">
             Testimonials
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
