@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Skills = () => {
+  const { t } = useTranslation()
+  
   const technologies = [
     { name: "JavaScript", color: "from-yellow-400 to-yellow-600" },
     { name: "TypeScript", color: "from-blue-500 to-blue-700" },
@@ -33,7 +36,7 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
-            Skills & Technologies
+            {t('skills.title')}
           </h2>
         </motion.div>
 

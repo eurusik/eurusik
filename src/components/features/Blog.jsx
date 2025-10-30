@@ -4,8 +4,10 @@ import { BookOpen, ExternalLink, Calendar } from 'lucide-react'
 import { MediumIcon } from '../ui/icons'
 import { MEDIUM_CONFIG } from '../../config'
 import { useMediumArticles } from '../../hooks'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Blog = () => {
+  const { t } = useTranslation()
   const { articles, loading } = useMediumArticles()
   const [imageErrors, setImageErrors] = useState({})
 
@@ -24,10 +26,10 @@ const Blog = () => {
           className="text-center mb-16"
         >
           <h2 id="blog-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-heading">
-            Latest Articles
+            {t('blog.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Thoughts and insights on frontend development
+            {t('blog.subtitle')}
           </p>
         </motion.div>
 
@@ -98,7 +100,7 @@ const Blog = () => {
                     )}
 
                     <div className="flex items-center gap-2 text-blue-600 font-semibold transition-all">
-                      <span>Read more</span>
+                      <span>{t('blog.readMore')}</span>
                       <ExternalLink size={16} className="transition-transform" />
                     </div>
                   </div>
@@ -123,7 +125,7 @@ const Blog = () => {
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
             >
               <MediumIcon size={20} />
-              <span>View All Articles on Medium</span>
+              <span>{t('blog.viewAll')}</span>
               <ExternalLink size={16} />
             </a>
           </motion.div>

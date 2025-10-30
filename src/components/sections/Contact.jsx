@@ -1,30 +1,33 @@
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, MapPin, Send } from 'lucide-react'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Contact = () => {
+  const { t } = useTranslation()
+  
   const contactInfo = [
     {
       icon: <Mail size={24} />,
-      label: "Email",
+      label: t('contact.email'),
       value: "john.rusakov@gmail.com",
       link: "mailto:john.rusakov@gmail.com"
     },
     {
       icon: <Github size={24} />,
-      label: "GitHub",
+      label: t('contact.github'),
       value: "github.com/eurusik",
       link: "https://github.com/eurusik"
     },
     {
       icon: <Linkedin size={24} />,
-      label: "LinkedIn",
+      label: t('contact.linkedin'),
       value: "linkedin.com/in/eugene-rusakov-27606352",
       link: "https://www.linkedin.com/in/eugene-rusakov-27606352/"
     },
     {
       icon: <MapPin size={24} />,
-      label: "Location",
-      value: "Kyiv, Ukraine",
+      label: t('contact.location'),
+      value: t('contact.locationValue'),
       link: null
     }
   ]
@@ -40,10 +43,10 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 font-heading">
-            Let&apos;s Work Together
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Ready to bring your ideas to life? Let&apos;s discuss your next project and create something amazing together.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -107,7 +110,7 @@ const Contact = () => {
             className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:shadow-2xl text-lg"
           >
             <Send size={24} />
-            Hire Me
+            {t('contact.hireMe')}
           </motion.a>
         </motion.div>
 
@@ -120,17 +123,17 @@ const Contact = () => {
           className="text-center mt-16 pt-8 border-t border-white/20"
         >
           <p className="text-white/60 text-sm">
-            © 2025 Eugene Rusakov. Built with React, Tailwind CSS & Framer Motion.
+            {t('footer.copyright')}
           </p>
           <div className="flex items-center justify-center gap-2 mt-3">
-            <span className="text-white/50 text-xs">Hosted on</span>
+            <span className="text-white/50 text-xs">{t('footer.hostedOn')}</span>
             <div className="flex items-center gap-1">
               <img 
                 src="/logos/pi.svg" 
                 alt="Raspberry Pi"
                 className="w-4 h-4 opacity-70"
               />
-              <span className="text-white/50 text-xs">Raspberry Pi cluster with</span>
+              <span className="text-white/50 text-xs">Raspberry Pi {t('footer.cluster')}</span>
               <img 
                 src="/logos/k3.svg" 
                 alt="k3s"

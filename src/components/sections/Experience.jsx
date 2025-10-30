@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Briefcase, ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslation } from '../../contexts/LanguageContext'
+import { experienceData } from '../../locales/experienceData'
 
 const Experience = () => {
   const [showAll, setShowAll] = useState(false)
+  const { locale } = useTranslation()
+  const data = experienceData[locale]
+  
   const experiences = [
     {
       company: "Angular Primitives",
@@ -121,7 +126,7 @@ const Experience = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
-            Experience
+            {data.title}
           </h2>
         </motion.div>
 
@@ -167,7 +172,7 @@ const Experience = () => {
                     )}
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
-                    {exp.position}
+                    {data.experiences[index]?.position || exp.position}
                   </h3>
                 </div>
 
@@ -179,7 +184,7 @@ const Experience = () => {
                 </div>
 
                 <p className="text-gray-700 mb-4 leading-relaxed">
-                  {exp.description}
+                  {data.experiences[index]?.description || exp.description}
                 </p>
 
                 <div className="flex flex-wrap gap-2">
@@ -214,12 +219,12 @@ const Experience = () => {
                 {showAll ? (
                   <>
                     <ChevronUp size={20} />
-                    Show Less Experience
+                    {data.showLess}
                   </>
                 ) : (
                   <>
                     <ChevronDown size={20} />
-                    Show All Experience ({experiences.length - 3} more)
+                    {data.showMore} ({experiences.length - 3})
                   </>
                 )}
               </motion.button>

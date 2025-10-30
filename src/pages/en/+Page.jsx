@@ -14,7 +14,7 @@ import BackToTop from '../../components/ui/BackToTop'
 
 export default function Page() {
   return (
-    <LanguageProvider locale="uk">
+    <LanguageProvider locale="en">
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
         <Header />
         <main>

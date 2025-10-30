@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion'
 import { Download, Mail, ArrowDown } from 'lucide-react'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Hero = () => {
+  const { t } = useTranslation()
+  
   const scrollToContact = () => {
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section">
+    <section id="home" className="min-h-screen flex items-center justify-center px-6 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section">
       {/* Animated background gradient */}
       <div className="absolute inset-0 animated-gradient opacity-90"></div>
       
@@ -103,7 +106,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           >
-            Eugene Rusakov
+            {t('hero.name')}
           </motion.h1>
 
           {/* Title */}
@@ -113,7 +116,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-4 font-light"
           >
-            Senior Frontend Developer | Tech Lead
+            {t('hero.title')}
           </motion.p>
 
           {/* Subtitle with keywords */}
@@ -123,7 +126,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-lg sm:text-xl text-white/80 mb-12 font-light max-w-2xl mx-auto"
           >
-            11+ years of experience in React, Angular & TypeScript
+            {t('hero.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -141,7 +144,7 @@ const Hero = () => {
             className="w-full sm:w-auto btn-primary flex items-center justify-center gap-2 text-lg px-8 py-4"
           >
             <Mail size={20} />
-            Contact Me
+            {t('hero.contactMe')}
           </motion.button>
           
           <motion.button
@@ -150,7 +153,7 @@ const Hero = () => {
             className="w-full sm:w-auto btn-secondary flex items-center justify-center gap-2 text-lg px-8 py-4"
           >
             <Download size={20} />
-            Download CV
+            {t('hero.downloadCV')}
           </motion.button>
         </motion.div>
 

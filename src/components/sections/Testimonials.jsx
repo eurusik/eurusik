@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { Quote, Linkedin } from 'lucide-react'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Testimonials = () => {
+  const { t } = useTranslation()
+  
   const testimonials = [
     {
       name: "Mykola Polovinkin",
@@ -40,10 +43,10 @@ const Testimonials = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-heading">
-            Testimonials
+            {t('testimonials.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            What colleagues and partners say about working with me
+            {t('testimonials.subtitle')}
           </p>
         </motion.div>
 

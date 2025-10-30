@@ -1,0 +1,116 @@
+{
+  "hero": {
+    "name": "Євген Русаков",
+    "title": "Senior Frontend Розробник | Tech Lead",
+    "subtitle": "11+ років досвіду в React, Angular та TypeScript",
+    "contactMe": "Зв'язатися зі мною",
+    "downloadCV": "Завантажити резюме"
+  },
+  "about": {
+    "title": "Про мене",
+    "experience": "11+ років досвіду",
+    "description1": "у створенні масштабованих веб-додатків для провідних технологічних компаній України. Мейнтейнер",
+    "angularPrimitives": "Angular Primitives",
+    "description2": "та керую frontend розробкою в",
+    "company": "Сільпо",
+    "description3": "Експерт у",
+    "angular": "Angular",
+    "typescript": "TypeScript",
+    "react": "React",
+    "and": "та",
+    "microfrontends": "мікрофронтендах",
+    "description4": "з досвідом в e-commerce, fintech та enterprise рішеннях."
+  },
+  "blog": {
+    "title": "Останні статті",
+    "subtitle": "Думки та інсайти про frontend розробку",
+    "viewAll": "Переглянути всі статті на Medium",
+    "loading": "Завантаження статей...",
+    "error": "Не вдалося завантажити статті",
+    "readMore": "Читати далі"
+  },
+  "companies": {
+    "title": "Компанії, з якими я працював",
+    "subtitle": "Досвід роботи у світових та українських tech лідерах",
+    "current": "Поточне місце роботи",
+    "viewAll": "Дивитись весь досвід"
+  },
+  "experience": {
+    "title": "Досвід роботи"
+  },
+  "skills": {
+    "title": "Навички та технології"
+  },
+  "education": {
+    "title": "Освіта"
+  },
+  "github": {
+    "title": "GitHub активність",
+    "subtitle": "Останні внески в open source",
+    "loading": "Завантаження активності...",
+    "error": "Не вдалося завантажити активність",
+    "viewProfile": "Переглянути повний GitHub профіль",
+    "stats": {
+      "repos": "Публічні репозиторії",
+      "yearContributions": "Річні внески",
+      "currentStreak": "Поточна серія",
+      "days": "днів"
+    },
+    "recentActivity": "Остання активність",
+    "contributionGraph": "Графік внесків",
+    "less": "Менше",
+    "more": "Більше",
+    "events": {
+      "pushed": "Відправлено",
+      "commit": "коміт",
+      "commits": "комітів",
+      "opened": "Відкрито",
+      "closed": "Закрито",
+      "merged": "Об'єднано",
+      "pullRequest": "pull request",
+      "created": "Створено",
+      "branch": "гілку",
+      "tag": "тег",
+      "repository": "репозиторій",
+      "starred": "Додано зірку репозиторію",
+      "forked": "Форкнуто репозиторій",
+      "issue": "issue"
+    },
+    "timeAgo": {
+      "justNow": "Щойно",
+      "hoursAgo": "год тому",
+      "daysAgo": "дн тому"
+    }
+  },
+  "testimonials": {
+    "title": "Відгуки",
+    "subtitle": "Що кажуть колеги та клієнти"
+  },
+  "contact": {
+    "title": "Давайте працювати разом",
+    "subtitle": "Готові втілити ваші ідеї в життя? Давайте обговоримо ваш наступний проєкт і створимо щось неймовірне разом.",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "location": "Локація",
+    "locationValue": "Київ, Україна",
+    "hireMe": "Найняти мене"
+  },
+  "footer": {
+    "copyright": "© 2025 Євген Русаков. Створено за допомогою React, Tailwind CSS та Framer Motion.",
+    "hostedOn": "Хостинг на",
+    "cluster": "кластері з"
+  },
+  "nav": {
+    "home": "Головна",
+    "about": "Про мене",
+    "blog": "Блог",
+    "companies": "Компанії",
+    "experience": "Досвід",
+    "skills": "Навички",
+    "education": "Освіта",
+    "github": "GitHub",
+    "testimonials": "Відгуки",
+    "contact": "Контакти"
+  }
+}

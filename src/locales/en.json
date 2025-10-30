@@ -1,0 +1,116 @@
+{
+  "hero": {
+    "name": "Eugene Rusakov",
+    "title": "Senior Frontend Developer | Tech Lead",
+    "subtitle": "11+ years of experience in React, Angular & TypeScript",
+    "contactMe": "Contact Me",
+    "downloadCV": "Download CV"
+  },
+  "about": {
+    "title": "About Me",
+    "experience": "11+ years of experience",
+    "description1": "building scalable web applications for Ukraine's leading tech companies. Maintaining",
+    "angularPrimitives": "Angular Primitives",
+    "description2": "and leading frontend development at",
+    "company": "Silpo",
+    "description3": "Expert in",
+    "angular": "Angular",
+    "typescript": "TypeScript",
+    "react": "React",
+    "and": "and",
+    "microfrontends": "microfrontends",
+    "description4": "with experience in e-commerce, fintech, and enterprise solutions."
+  },
+  "blog": {
+    "title": "Latest Articles",
+    "subtitle": "Thoughts and insights on frontend development",
+    "viewAll": "View All Articles on Medium",
+    "loading": "Loading articles...",
+    "error": "Failed to load articles",
+    "readMore": "Read More"
+  },
+  "companies": {
+    "title": "Companies I've Worked With",
+    "subtitle": "Experience with global and Ukrainian tech leaders",
+    "current": "Current Workplace",
+    "viewAll": "View All Experience"
+  },
+  "experience": {
+    "title": "Work Experience"
+  },
+  "skills": {
+    "title": "Skills & Technologies"
+  },
+  "education": {
+    "title": "Education"
+  },
+  "github": {
+    "title": "GitHub Activity",
+    "subtitle": "Recent open source contributions",
+    "loading": "Loading activity...",
+    "error": "Failed to load activity",
+    "viewProfile": "View Full GitHub Profile",
+    "stats": {
+      "repos": "Public Repos",
+      "yearContributions": "Year Contributions",
+      "currentStreak": "Current Streak",
+      "days": "days"
+    },
+    "recentActivity": "Recent Activity",
+    "contributionGraph": "Contribution Graph",
+    "less": "Less",
+    "more": "More",
+    "events": {
+      "pushed": "Pushed",
+      "commit": "commit",
+      "commits": "commits",
+      "opened": "Opened",
+      "closed": "Closed",
+      "merged": "Merged",
+      "pullRequest": "pull request",
+      "created": "Created",
+      "branch": "branch",
+      "tag": "tag",
+      "repository": "repository",
+      "starred": "Starred repository",
+      "forked": "Forked repository",
+      "issue": "issue"
+    },
+    "timeAgo": {
+      "justNow": "Just now",
+      "hoursAgo": "h ago",
+      "daysAgo": "d ago"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "What colleagues and clients say"
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "location": "Location",
+    "locationValue": "Kyiv, Ukraine",
+    "hireMe": "Hire Me"
+  },
+  "footer": {
+    "copyright": "© 2025 Eugene Rusakov. Built with React, Tailwind CSS & Framer Motion.",
+    "hostedOn": "Hosted on",
+    "cluster": "cluster with"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "companies": "Companies",
+    "experience": "Experience",
+    "skills": "Skills",
+    "education": "Education",
+    "github": "GitHub",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  }
+}

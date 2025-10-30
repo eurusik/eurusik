@@ -2,8 +2,10 @@ import { motion } from 'framer-motion'
 import { Github, GitBranch, GitCommit, GitPullRequest, Star, GitFork, Code, BookMarked, Activity } from 'lucide-react'
 import { useGitHubActivity } from '../../hooks'
 import { GITHUB_CONFIG } from '../../config'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const GitHubActivity = () => {
+  const { t } = useTranslation()
   const { events, contributions, stats, contribStats, loading } = useGitHubActivity()
 
   const getEventIcon = (type) => {
@@ -28,18 +30,35 @@ const GitHubActivity = () => {
       case 'PushEvent': {
         const commits = event.payload.commits?.length || 0
         if (commits === 0) return null
-        return `Pushed ${commits} commit${commits !== 1 ? 's' : ''}`
+        const commitWord = commits === 1 ? t('github.events.commit') : t('github.events.commits')
+        return `${t('github.events.pushed')} ${commits} ${commitWord}`
       }
-      case 'PullRequestEvent':
-        return `${event.payload.action?.charAt(0).toUpperCase() + event.payload.action?.slice(1) || 'Updated'} pull request`
-      case 'CreateEvent':
-        return `Created ${event.payload.ref_type}`
+      case 'PullRequestEvent': {
+        const action = event.payload.action
+        const actionText = action === 'opened' ? t('github.events.opened') : 
+                          action === 'closed' ? t('github.events.closed') : 
+                          action === 'merged' ? t('github.events.merged') : 
+                          action?.charAt(0).toUpperCase() + action?.slice(1)
+        return `${actionText} ${t('github.events.pullRequest')}`
+      }
+      case 'CreateEvent': {
+        const refType = event.payload.ref_type
+        const typeText = refType === 'branch' ? t('github.events.branch') : 
+                        refType === 'tag' ? t('github.events.tag') : 
+                        refType === 'repository' ? t('github.events.repository') : refType
+        return `${t('github.events.created')} ${typeText}`
+      }
       case 'WatchEvent':
-        return 'Starred repository'
+        return t('github.events.starred')
       case 'ForkEvent':
-        return 'Forked repository'
-      case 'IssuesEvent':
-        return `${event.payload.action?.charAt(0).toUpperCase() + event.payload.action?.slice(1) || 'Updated'} issue`
+        return t('github.events.forked')
+      case 'IssuesEvent': {
+        const action = event.payload.action
+        const actionText = action === 'opened' ? t('github.events.opened') : 
+                          action === 'closed' ? t('github.events.closed') : 
+                          action?.charAt(0).toUpperCase() + action?.slice(1)
+        return `${actionText} ${t('github.events.issue')}`
+      }
       default:
         return event.type.replace('Event', '')
     }
@@ -51,9 +70,9 @@ const GitHubActivity = () => {
     const hours = Math.floor(diff / (1000 * 60 * 60))
     const days = Math.floor(hours / 24)
 
-    if (hours < 1) return 'Just now'
-    if (hours < 24) return `${hours}h ago`
-    if (days < 7) return `${days}d ago`
+    if (hours < 1) return t('github.timeAgo.justNow')
+    if (hours < 24) return `${hours}${t('github.timeAgo.hoursAgo')}`
+    if (days < 7) return `${days}${t('github.timeAgo.daysAgo')}`
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
@@ -113,10 +132,10 @@ const GitHubActivity = () => {
           className="text-center mb-16"
         >
           <h2 id="github-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 font-heading">
-            GitHub Activity
+            {t('github.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Recent contributions and open source activity
+            {t('github.subtitle')}
           </p>
         </motion.div>
 
@@ -137,7 +156,7 @@ const GitHubActivity = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm font-medium mb-1">Public Repos</p>
+                    <p className="text-gray-600 text-sm font-medium mb-1">{t('github.stats.repos')}</p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                       {stats.repos}
                     </p>
@@ -157,7 +176,7 @@ const GitHubActivity = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm font-medium mb-1">Year Contributions</p>
+                    <p className="text-gray-600 text-sm font-medium mb-1">{t('github.stats.yearContributions')}</p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                       {contribStats.total}
                     </p>
@@ -177,9 +196,9 @@ const GitHubActivity = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm font-medium mb-1">Current Streak</p>
+                    <p className="text-gray-600 text-sm font-medium mb-1">{t('github.stats.currentStreak')}</p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      {contribStats.streak} days
+                      {contribStats.streak} {t('github.stats.days')}
                     </p>
                   </div>
                   <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
@@ -197,7 +216,7 @@ const GitHubActivity = () => {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Recent Activity</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">{t('github.recentActivity')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4" role="list" aria-label="GitHub recent activities">
                 {events.map((event, index) => {
                   const description = getEventDescription(event)
@@ -250,7 +269,7 @@ const GitHubActivity = () => {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Contribution Graph</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">{t('github.contributionGraph')}</h3>
               <div className="glass-card rounded-2xl p-4 md:p-6 bg-gradient-to-br from-white/80 to-gray-50/80 border border-gray-200 overflow-hidden">
                 {/* Custom scrollbar styling */}
                 <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
@@ -308,7 +327,7 @@ const GitHubActivity = () => {
 
                     {/* Legend */}
                     <div className="flex items-center gap-2 md:gap-2 mt-4 md:mt-4 text-[10px] md:text-xs text-gray-600 font-medium">
-                      <span>Less</span>
+                      <span>{t('github.less')}</span>
                       <div className="flex gap-1 md:gap-1">
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-gray-200 shadow-sm"></div>
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-200 shadow-sm"></div>
@@ -316,7 +335,7 @@ const GitHubActivity = () => {
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-600 shadow-sm"></div>
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm bg-green-700 shadow-sm"></div>
                       </div>
-                      <span>More</span>
+                      <span>{t('github.more')}</span>
                     </div>
                   </div>
                 </div>
@@ -338,7 +357,7 @@ const GitHubActivity = () => {
                 className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition-shadow duration-300"
               >
                 <Github size={20} />
-                <span>View Full GitHub Profile</span>
+                <span>{t('github.viewProfile')}</span>
               </a>
             </motion.div>
           </>

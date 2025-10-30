@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { GraduationCap, Award, ExternalLink } from 'lucide-react'
+import { useTranslation } from '../../contexts/LanguageContext'
 
 const Education = () => {
+  const { t } = useTranslation()
+  
   const education = {
     institution: "Kharkiv Social and Economic Institute",
     degree: "Bachelor's Degree in Computer Science",
@@ -87,7 +90,7 @@ const Education = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
-            Education & Certifications
+            {t('education.title')}
           </h2>
         </motion.div>
 

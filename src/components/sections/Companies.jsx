@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from '../../contexts/LanguageContext'
+import { companiesData } from '../../locales/companiesData'
 
 const Companies = () => {
+  const { locale } = useTranslation()
+  const data = companiesData[locale]
+  
   const companies = [
     {
       name: "Сільпо",
@@ -39,10 +44,10 @@ const Companies = () => {
           className="text-center mb-12"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-4 font-heading">
-            Trusted by Leading Companies
+            {data.title}
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            These industry leaders trusted me to enhance their digital platforms and deliver exceptional user experiences
+            {data.subtitle}
           </p>
         </motion.div>
 
@@ -80,7 +85,7 @@ const Companies = () => {
                       {company.name}
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      {company.description}
+                      {data.companies[index]?.description || company.description}
                     </p>
                   </div>
                 </a>
@@ -121,7 +126,7 @@ const Companies = () => {
                     {company.name}
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    {company.description}
+                    {data.companies[index]?.description || company.description}
                   </p>
                 </div>
               </a>
