@@ -28,7 +28,7 @@ const About = () => {
             for Ukraine&apos;s leading tech companies. Maintaining <span className="font-semibold text-purple-600">Angular Primitives</span>{' '}
             and leading frontend development at <span className="font-semibold text-indigo-600">Сільпо</span>. 
             Expert in <span className="font-semibold">Angular</span>, <span className="font-semibold">TypeScript</span>,{' '}
-            <span className="font-semibold">React</span>, and <span className="font-semibold">microservices architecture</span>,{' '}
+            <span className="font-semibold">React</span>, and <span className="font-semibold">microfrontends</span>,{' '}
             with experience in e-commerce, fintech, and enterprise solutions.
           </p>
         </motion.div>
