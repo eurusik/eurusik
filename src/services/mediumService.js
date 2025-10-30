@@ -33,7 +33,8 @@ export const fetchMediumArticles = async (limit = MEDIUM_CONFIG.articlesLimit) =
         .replace(/<[^>]+>/g, '')
         .substring(0, 120) + '...',
       thumbnail: item.thumbnail || extractImageFromContent(item.content),
-      categories: item.categories?.slice(0, 2) || []
+      categories: item.categories?.slice(0, 2) || [],
+      source: 'Medium'
     }))
     
     return formattedArticles

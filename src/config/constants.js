@@ -17,3 +17,10 @@ export const GITHUB_CONFIG = {
   username: 'eurusik',
   profileUrl: 'https://github.com/eurusik'
 }
+
+export const DOU_CONFIG = {
+  username: 'john-rusakov',
+  rssUrl: 'https://dou.ua/users/john-rusakov/articles/feed/',
+  profileUrl: 'https://dou.ua/users/john-rusakov/articles/',
+  articlesLimit: 3
+}

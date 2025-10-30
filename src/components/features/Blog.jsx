@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { BookOpen, ExternalLink, Calendar } from 'lucide-react'
-import { MediumIcon } from '../ui/icons'
+import { MediumIcon, DOUIcon } from '../ui/icons'
 import { MEDIUM_CONFIG } from '../../config'
-import { useMediumArticles } from '../../hooks'
+import { useMediumArticles, useDOUArticles } from '../../hooks'
 import { useTranslation } from '../../contexts/LanguageContext'
 
 const Blog = () => {
   const { t } = useTranslation()
-  const { articles, loading } = useMediumArticles()
+  const { articles: mediumArticles, loading: mediumLoading } = useMediumArticles()
+  const { articles: douArticles, loading: douLoading } = useDOUArticles()
   const [imageErrors, setImageErrors] = useState({})
+
+  const loading = mediumLoading || douLoading
+  // Combine articles from both sources (DOU first, then Medium)
+  const articles = [...douArticles, ...mediumArticles]
 
   const handleImageError = (index) => {
     setImageErrors(prev => ({ ...prev, [index]: true }))
@@ -55,7 +60,7 @@ const Blog = () => {
                   className="block"
                 >
                   <div className="relative h-48 overflow-hidden">
-                    {article.thumbnail && !imageErrors[index] ? (
+                    {article.thumbnail && article.thumbnail !== 'DOU_LOGO' && !imageErrors[index] ? (
                       <>
                         <img
                           src={article.thumbnail}
@@ -65,6 +70,10 @@ const Blog = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                       </>
+                    ) : article.thumbnail === 'DOU_LOGO' ? (
+                      <div className="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center transition-transform duration-300">
+                        <DOUIcon size={64} className="text-white" />
+                      </div>
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center transition-transform duration-300">
                         <BookOpen size={48} className="text-white/80" />
@@ -73,6 +82,19 @@ const Blog = () => {
                   </div>
 
                   <div className="p-6">
+                    {/* Source badge */}
+                    {article.source && (
+                      <div className="mb-3">
+                        <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full ${
+                          article.source === 'DOU' 
+                            ? 'bg-orange-100 text-orange-600' 
+                            : 'bg-gray-100 text-gray-600'
+                        }`}>
+                          {article.source === 'DOU' ? '📰' : '✍️'} {article.source}
+                        </span>
+                      </div>
+                    )}
+                    
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                       <Calendar size={16} />
                       <span>{article.pubDate}</span>

@@ -21,19 +21,22 @@ COPY public ./public
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
+FROM node:20-alpine
 
-# Remove default nginx static assets
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy built application from Vike
-COPY --from=build /app/dist/client /usr/share/nginx/html
+# Install production dependencies only
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --prefer-offline --no-audit
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy server file
+COPY server.js ./
 
-# Expose port 80
-EXPOSE 80
+# Copy built static files from build stage
+COPY --from=build /app/dist/client ./dist/client
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Expose ports (3001 for API, 80 for static files via Nginx sidecar or separate service)
+EXPOSE 3001
+
+# Start Node.js server
+CMD ["node", "server.js"]

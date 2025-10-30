@@ -13,6 +13,6 @@ spec:
   selector:
     app: eurusik-app   # Підключення до подів з цим лейблом
   ports:
-  - port: 80           # Зовнішній порт сервісу
-    targetPort: 80     # Порт контейнера
+  - port: 80           # Зовнішній порт сервісу (Ingress очікує 80)
+    targetPort: 3001   # Порт Node.js сервера в контейнері
     protocol: TCP
