@@ -9,7 +9,7 @@ import Education from '../../components/sections/Education'
 import GitHubActivity from '../../components/features/GitHubActivity'
 import Testimonials from '../../components/sections/Testimonials'
 import Contact from '../../components/sections/Contact'
-import BackToTop from '../../components/layout/BackToTop'
+import BackToTop from '../../components/ui/BackToTop'
 
 export default function Page() {
   return (
