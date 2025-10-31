@@ -1,9 +1,18 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Award, ExternalLink } from 'lucide-react'
+import { GraduationCap, Award, ExternalLink, Server, Code2, Smartphone, Palette, Zap, Database, Monitor, Globe } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 
 const Education = () => {
   const { t } = useTranslation()
+  
+  // Icon mapping helper
+  const getIcon = (iconName) => {
+    const icons = {
+      Server, Code2, Smartphone, Palette, Zap, Database, Monitor, Globe
+    }
+    const Icon = icons[iconName]
+    return Icon ? <Icon size={32} className="text-white" /> : null
+  }
   
   const education = {
     institution: t('education.institution'),
@@ -17,7 +26,8 @@ const Education = () => {
       title: "Node.js - Fundamentals and Application Architecture",
       provider: "Udemy",
       year: "2022",
-      logo: "🚀",
+      icon: "Server",
+      iconColor: "from-green-500 to-green-600",
       credentialId: "UC-7502d10e-cf1a-46d4-8334-deba93d039c7",
       link: "#"
     },
@@ -25,7 +35,8 @@ const Education = () => {
       title: "Angular Crash Course",
       provider: "Udemy",
       year: "2022",
-      logo: "🅰️",
+      icon: "Code2",
+      iconColor: "from-red-500 to-red-600",
       credentialId: "UC-1091efec-17b7-4ef1-8edd-0402bf73a27d",
       link: "#"
     },
@@ -33,7 +44,8 @@ const Education = () => {
       title: "React Native - The Practical Guide",
       provider: "Udemy",
       year: "2022",
-      logo: "📱",
+      icon: "Smartphone",
+      iconColor: "from-blue-500 to-blue-600",
       credentialId: "UC-4967d1c2-dd03-439d-aad0-46667270a8c5",
       link: "#"
     },
@@ -41,7 +53,8 @@ const Education = () => {
       title: "HTML, CSS",
       provider: "TestProvider",
       year: "2018",
-      logo: "🎨",
+      icon: "Palette",
+      iconColor: "from-pink-500 to-pink-600",
       credentialId: "TP02474800",
       link: "#"
     },
@@ -49,7 +62,8 @@ const Education = () => {
       title: "JavaScript Essential",
       provider: "TestProvider",
       year: "2018",
-      logo: "⚡",
+      icon: "Zap",
+      iconColor: "from-yellow-500 to-yellow-600",
       credentialId: "TP36139870",
       link: "#"
     },
@@ -57,7 +71,8 @@ const Education = () => {
       title: "PHP Starter",
       provider: "TestProvider",
       year: "2018",
-      logo: "🐘",
+      icon: "Database",
+      iconColor: "from-purple-500 to-purple-600",
       credentialId: "TP99236876",
       link: "#"
     },
@@ -65,7 +80,8 @@ const Education = () => {
       title: "JavaScript in WEB develop",
       provider: "World ORT",
       year: "2017",
-      logo: "💻",
+      icon: "Monitor",
+      iconColor: "from-indigo-500 to-indigo-600",
       credentialId: "SCHDP4IT9 №164588",
       link: "#"
     },
@@ -73,7 +89,8 @@ const Education = () => {
       title: "Fundamentals of WEB-programming. WEB-technology and the basis of WEB-design",
       provider: "World ORT",
       year: "2016",
-      logo: "🌐",
+      icon: "Globe",
+      iconColor: "from-cyan-500 to-cyan-600",
       credentialId: "SCHDP4IT2 №163311",
       link: "#"
     }
@@ -157,8 +174,8 @@ const Education = () => {
                   style={{ width: '280px' }}
                 >
                   <div className="text-center">
-                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {cert.logo}
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      {getIcon(cert.icon)}
                     </div>
                     
                     <h4 className="font-bold text-gray-800 mb-2 text-lg">
@@ -207,8 +224,8 @@ const Education = () => {
                 className="glass-card rounded-xl p-6 cursor-pointer group"
               >
                 <div className="text-center">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {cert.logo}
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    {getIcon(cert.icon)}
                   </div>
                   
                   <h4 className="font-bold text-gray-800 mb-2 text-lg">
