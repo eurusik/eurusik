@@ -1,4 +1,4 @@
-const DOUIcon = ({ size = 20, className = '' }) => {
+const DOUIcon = ({ size = 20, className = 'text-gray-900' }) => {
   return (
     <svg 
       width={size} 
