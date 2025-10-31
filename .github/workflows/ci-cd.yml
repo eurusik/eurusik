@@ -24,6 +24,14 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-modules-
+
     - name: Install dependencies
       run: npm ci --prefer-offline
 
@@ -82,6 +90,7 @@ jobs:
         cache-to: type=gha,mode=max
         build-args: |
           BUILDKIT_INLINE_CACHE=1
+          BUILDKIT_PROGRESS=plain
         outputs: type=docker,dest=/tmp/image.tar
 
     - name: Upload Docker image artifact

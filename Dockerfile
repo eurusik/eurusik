@@ -9,8 +9,9 @@ WORKDIR /app
 # Copy package files first for better layer caching
 COPY package.json package-lock.json ./
 
-# Install dependencies - this layer will be cached if package*.json unchanged
-RUN npm ci --prefer-offline --no-audit
+# Install dependencies with BuildKit cache mount for npm cache
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit
 
 # Copy only necessary source files
 COPY index.html postcss.config.js tailwind.config.js vite.config.js ./
@@ -25,9 +26,10 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install production dependencies only
+# Install production dependencies only with cache mount
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev --prefer-offline --no-audit
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev --prefer-offline --no-audit
 
 # Copy server file
 COPY server.js ./
