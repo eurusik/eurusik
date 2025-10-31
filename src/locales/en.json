@@ -24,7 +24,8 @@
   "blog": {
     "title": "Latest Articles",
     "subtitle": "Thoughts and insights on frontend development",
-    "viewAll": "View All Articles on Medium",
+    "viewAll": "View All Articles on",
+    "viewAllDOU": "View All Articles on DOU",
     "loading": "Loading articles...",
     "error": "Failed to load articles",
     "readMore": "Read More"
