@@ -174,7 +174,7 @@ const Education = () => {
                   style={{ width: '280px' }}
                 >
                   <div className="text-center">
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center transition-transform duration-300 shadow-lg`}>
                       {getIcon(cert.icon)}
                     </div>
                     
@@ -224,7 +224,7 @@ const Education = () => {
                 className="glass-card rounded-xl p-6 cursor-pointer group"
               >
                 <div className="text-center">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${cert.iconColor} flex items-center justify-center transition-transform duration-300 shadow-lg`}>
                     {getIcon(cert.icon)}
                   </div>
                   
