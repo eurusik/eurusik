@@ -127,20 +127,25 @@ const Contact = () => {
           </p>
           <div className="flex items-center justify-center gap-2 mt-3">
             <span className="text-white/50 text-xs">{t('footer.hostedOn')}</span>
-            <div className="flex items-center gap-1">
+            <a 
+              href="https://homelab.eurusik.tech/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 hover:opacity-100 transition-opacity duration-300"
+            >
               <img 
                 src="/logos/pi.svg" 
                 alt="Raspberry Pi"
                 className="w-4 h-4 opacity-70"
               />
-              <span className="text-white/50 text-xs">Raspberry Pi {t('footer.cluster')}</span>
+              <span className="text-white/50 text-xs hover:text-white/70">Raspberry Pi {t('footer.cluster')}</span>
               <img 
                 src="/logos/k3.svg" 
                 alt="k3s"
                 className="w-4 h-4 opacity-70"
               />
-              <span className="text-white/50 text-xs">k3s</span>
-            </div>
+              <span className="text-white/50 text-xs hover:text-white/70">k3s</span>
+            </a>
           </div>
         </motion.div>
       </div>
