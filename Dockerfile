@@ -17,6 +17,7 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY index.html postcss.config.js tailwind.config.js vite.config.js ./
 COPY src ./src
 COPY public ./public
+COPY scripts ./scripts
 
 # Build the application
 RUN npm run build
