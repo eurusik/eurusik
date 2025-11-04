@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS - Above the fold styles */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -11,11 +12,15 @@
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     overflow-x: hidden;
+    /* Prevent FOUT with font-display: swap fallback */
+    font-display: swap;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 600;
+    /* Prevent FOUT */
+    font-display: swap;
   }
 }
 

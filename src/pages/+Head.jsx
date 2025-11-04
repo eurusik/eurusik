@@ -3,9 +3,17 @@ import '../index.css'
 export default function Head() {
   return (
     <>
+      {/* Critical Resource Hints */}
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       {/* Favicon */}
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="apple-touch-icon" href="/favicon.svg" />
+      
+      {/* DNS Prefetch and Preconnect for external resources */}
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
       
       {/* Primary Meta Tags */}
       <title>Eugene Rusakov - Senior Frontend Developer | React, Angular, TypeScript Expert</title>
@@ -39,13 +47,26 @@ export default function Head() {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       
-      {/* Fonts - Optimized for performance */}
+      {/* Fonts - Optimized for performance with preload and async loading */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link 
+        rel="preload"
+        as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      />
+      <link 
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" 
         rel="stylesheet"
+        media="print"
+        onLoad="this.media='all'"
       />
+      <noscript>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" 
+          rel="stylesheet"
+        />
+      </noscript>
       
       {/* Structured Data (JSON-LD) */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{

@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import compression from 'compression'
+import expressStaticGzip from 'express-static-gzip'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -10,6 +12,19 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 app.use(cors())
+
+// Enable compression (gzip/deflate)
+app.use(compression({
+  threshold: 1024, // Only compress files larger than 1KB
+  level: 6, // Compression level (0-9, 6 is balanced)
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false
+    }
+    // Compress all text-based responses
+    return compression.filter(req, res)
+  }
+}))
 
 // API endpoint for RSS proxy
 app.get('/api/rss-proxy', async (req, res) => {
@@ -43,11 +58,24 @@ app.get('/api/rss-proxy', async (req, res) => {
   }
 })
 
-// Serve static files from dist/client
-app.use(express.static(path.join(__dirname, 'dist/client')))
+// Serve static files from dist/client with optimized caching
+// Use pre-compressed .gz and .br files when available
+app.use(expressStaticGzip(path.join(__dirname, 'dist/client'), {
+  enableBrotli: true, // Serve .br files if available
+  orderPreference: ['br', 'gz'], // Prefer brotli over gzip
+  serveStatic: {
+    maxAge: '1y', // Cache static assets for 1 year
+    immutable: true, // Assets with hash in filename won't change
+    etag: true, // Enable ETag for validation
+    lastModified: true // Enable Last-Modified header
+  }
+}))
 
 // Handle client-side routing - return index.html for all routes
 app.get('*', (req, res) => {
+  // Set shorter cache for HTML files (1 hour) for fresh content updates
+  res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate')
+  res.setHeader('ETag', 'W/"' + Date.now() + '"')
   res.sendFile(path.join(__dirname, 'dist/client/index.html'))
 })
 
