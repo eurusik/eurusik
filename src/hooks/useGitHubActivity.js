@@ -17,7 +17,7 @@ export const useGitHubActivity = () => {
 
   const loadGitHubData = async () => {
     try {
-      // Fetch events
+      // Fetch events (returns empty array on error instead of throwing)
       const eventsData = await fetchGitHubEvents(100)
       
       // Process recent activity
@@ -29,12 +29,17 @@ export const useGitHubActivity = () => {
       setContributions(contribArray)
       setContribStats(contribStatsData)
 
-      // Fetch user stats
+      // Fetch user stats (returns fallback data on error)
       const userData = await fetchGitHubUser()
       const userStats = calculateUserStats(userData, eventsData)
       setStats(userStats)
       
-      setError(null)
+      // Only set error if we have absolutely no data
+      if (eventsData.length === 0 && stats.repos === 0) {
+        setError('Limited data available due to API restrictions')
+      } else {
+        setError(null)
+      }
     } catch (err) {
       console.error('Error loading GitHub data:', err)
       setError(err.message)

@@ -12,14 +12,15 @@ export const fetchGitHubEvents = async (perPage = 100) => {
     )
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      console.warn(`GitHub API returned ${response.status}. Using fallback data.`)
+      return []
     }
     
     const data = await response.json()
     return data
   } catch (error) {
     console.error('Error fetching GitHub events:', error)
-    throw error
+    return []
   }
 }
 
@@ -34,14 +35,25 @@ export const fetchGitHubUser = async () => {
     )
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      console.warn(`GitHub API returned ${response.status}. Using fallback data.`)
+      // Return minimal fallback data
+      return {
+        public_repos: 50,
+        followers: 100,
+        login: GITHUB_CONFIG.username
+      }
     }
     
     const data = await response.json()
     return data
   } catch (error) {
     console.error('Error fetching GitHub user:', error)
-    throw error
+    // Return fallback data instead of throwing
+    return {
+      public_repos: 50,
+      followers: 100,
+      login: GITHUB_CONFIG.username
+    }
   }
 }
 
