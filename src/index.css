@@ -22,6 +22,18 @@
     /* Prevent FOUT */
     font-display: swap;
   }
+  
+  /* Reserve space for images to prevent CLS */
+  img {
+    /* Prevent layout shift while loading */
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Ensure containers have min-height to prevent collapse */
+  section {
+    min-height: fit-content;
+  }
 }
 
 @layer components {
@@ -39,6 +51,28 @@
   
   .btn-secondary {
     @apply bg-white/10 backdrop-blur-md border border-white/20 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-white/20 shadow-lg;
+  }
+  
+  /* Prevent CLS for article images */
+  .article-image-container {
+    aspect-ratio: 16 / 9;
+    @apply relative overflow-hidden;
+  }
+  
+  /* Skeleton loader for preventing CLS */
+  .skeleton {
+    @apply animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%];
+  }
+  
+  /* Reserve minimum heights to prevent layout shift */
+  .min-h-section {
+    min-height: 400px;
+  }
+  
+  /* Optimize off-screen content rendering */
+  .lazy-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
   }
 }
 

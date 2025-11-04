@@ -3,6 +3,23 @@ import '../index.css'
 export default function Head() {
   return (
     <>
+      {/* Critical inline CSS for above-the-fold content */}
+      <style dangerouslySetInnerHTML={{__html: `
+        html{scroll-behavior:smooth;overflow-x:hidden}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell',sans-serif;overflow-x:hidden;margin:0;padding:0}
+        .min-h-screen{min-height:100vh}
+        .animated-gradient{background:linear-gradient(-45deg,#667eea,#764ba2,#f093fb,#4facfe);background-size:400% 400%;animation:gradient-shift 15s ease infinite}
+        @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .hero-section{padding:4rem 1.5rem}
+        .avatar-container{width:10rem;height:10rem;margin:0 auto}
+        img{max-width:100%;height:auto}
+        .text-4xl{font-size:2.25rem;line-height:2.5rem}
+        .text-xl{font-size:1.25rem;line-height:1.75rem}
+        .font-bold{font-weight:700}
+        .mb-4{margin-bottom:1rem}
+        .mb-6{margin-bottom:1.5rem}
+        .text-center{text-align:center}
+      `}} />
       {/* Critical Resource Hints */}
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,9 +27,25 @@ export default function Head() {
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="apple-touch-icon" href="/favicon.svg" />
       
+      {/* Preload critical resources */}
+      <link 
+        rel="preload" 
+        as="image" 
+        type="image/webp"
+        href="/avatar-160.webp" 
+        imagesrcset="/avatar-160.webp 160w, /avatar-320.webp 320w"
+        imagesizes="(max-width: 640px) 128px, 160px"
+        fetchpriority="high" 
+      />
+      <link 
+        rel="preload" 
+        as="style" 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@600;700&display=optional" 
+      />
+      
       {/* DNS Prefetch and Preconnect for external resources */}
-      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
       
       {/* Primary Meta Tags */}
@@ -47,23 +80,23 @@ export default function Head() {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       
-      {/* Fonts - Optimized for performance with preload and async loading */}
+      {/* Fonts - Optimized for performance with preload and font-display: optional to prevent CLS */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link 
         rel="preload"
         as="style"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@600;700&display=optional"
       />
       <link 
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@600;700&display=optional" 
         rel="stylesheet"
         media="print"
         onLoad="this.media='all'"
       />
       <noscript>
         <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@600;700&display=optional" 
           rel="stylesheet"
         />
       </noscript>

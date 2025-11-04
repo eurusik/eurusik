@@ -79,6 +79,10 @@ const Companies = () => {
                         src={company.logo} 
                         alt={`${company.name} logo`}
                         className="w-14 h-14 object-contain"
+                        width="56"
+                        height="56"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     <h3 className="text-lg font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">
@@ -120,6 +124,10 @@ const Companies = () => {
                       src={company.logo} 
                       alt={`${company.name} logo`}
                       className="w-16 h-16 object-contain"
+                      width="64"
+                      height="64"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">

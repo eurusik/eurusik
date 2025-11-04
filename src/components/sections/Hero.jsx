@@ -10,7 +10,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section">
+    <section id="home" className="min-h-screen flex items-center justify-center px-6 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Hero Section" style={{ minHeight: '100vh' }}>
       {/* Animated background gradient */}
       <div className="absolute inset-0 animated-gradient opacity-90"></div>
       
@@ -58,7 +58,7 @@ const Hero = () => {
           >
             {/* Animated gradient border */}
             <motion.div 
-              className="w-full h-full rounded-full p-1 shadow-2xl"
+              className="w-full h-full rounded-full p-1 shadow-2xl relative"
               animate={{
                 background: [
                   'linear-gradient(0deg, #667eea, #764ba2)',
@@ -73,12 +73,25 @@ const Hero = () => {
                 ease: 'linear'
               }}
             >
-              <img 
-                src="/avatar.jpg" 
-                alt="Eugene Rusakov - Senior Frontend Developer"
-                className="w-full h-full rounded-full object-cover"
-                loading="eager"
-              />
+              <picture>
+                <source 
+                  type="image/webp"
+                  srcSet="/avatar-160.webp 160w, /avatar-320.webp 320w"
+                  sizes="(max-width: 640px) 128px, 160px"
+                />
+                <img 
+                  src="/avatar-160.jpg" 
+                  srcSet="/avatar-160.jpg 160w, /avatar-320.jpg 320w"
+                  sizes="(max-width: 640px) 128px, 160px"
+                  alt="Eugene Rusakov - Senior Frontend Developer"
+                  className="w-full h-full rounded-full object-cover"
+                  width="160"
+                  height="160"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
             </motion.div>
             {/* Animated glow */}
             <motion.div 

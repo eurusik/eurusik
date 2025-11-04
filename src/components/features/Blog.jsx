@@ -40,6 +40,10 @@ const Blog = () => {
                 src={article.thumbnail}
                 alt={article.title}
                 className="w-full h-full object-cover transition-transform duration-300"
+                width="400"
+                height="192"
+                loading="lazy"
+                decoding="async"
                 onError={() => handleImageError(index)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -104,7 +108,7 @@ const Blog = () => {
   )
 
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/30" aria-labelledby="blog-heading">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/30 min-h-section" aria-labelledby="blog-heading">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
