@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Build Docker image
+        run: |
+          docker build -t git.lab.home/eurusik/eurusik.tech:${{ github.sha }} -t git.lab.home/eurusik/eurusik.tech:latest .
+
+      - name: Push to Registry
+        run: |
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
+          docker push git.lab.home/eurusik/eurusik.tech:${{ github.sha }}
+          docker push git.lab.home/eurusik/eurusik.tech:latest
