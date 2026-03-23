@@ -1,41 +1,65 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from '../../contexts/LanguageContext'
+import SectionLabel from '../layout/SectionLabel'
 
 const About = () => {
-  const { t } = useTranslation()
-  
+  const { t, locale } = useTranslation()
+
+  const stats = [
+    { value: '11+', label: locale === 'uk' ? 'років досвіду' : 'years experience' },
+    { value: '5+', label: locale === 'uk' ? 'компаній' : 'companies' },
+    { value: '20+', label: locale === 'uk' ? 'проєктів' : 'projects shipped' },
+  ]
+
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="about-heading">
+    <section id="about" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
         >
-          <h2 id="about-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-8 font-heading">
-            {t('about.title')}
-          </h2>
-        </motion.div>
+          <SectionLabel number="01" label="ABOUT" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="glass-card rounded-2xl p-6 sm:p-8 md:p-12 text-center"
-        >
-          <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-inter">
-            <span className="font-semibold text-blue-600">{t('about.experience')}</span> {t('about.description1')}{' '}
-            <span className="font-semibold text-purple-600">{t('about.angularPrimitives')}</span>{' '}
-            {t('about.description2')} <span className="font-semibold text-indigo-600">{t('about.company')}</span>. 
-            {t('about.description3')} <span className="font-semibold">{t('about.angular')}</span>,{' '}
-            <span className="font-semibold">{t('about.typescript')}</span>,{' '}
-            <span className="font-semibold">{t('about.react')}</span>, {t('about.and')}{' '}
-            <span className="font-semibold">{t('about.microfrontends')}</span>,{' '}
-            {t('about.description4')}
-          </p>
+          <div className="flex flex-col lg:flex-row gap-10 items-start">
+            <div className="flex-1">
+              <p className="text-lg sm:text-xl lg:text-2xl font-light leading-[1.7] text-[#A0A0A8]">
+                <span className="text-[#EDEDEF] font-medium">{t('about.experience')}</span>{' '}
+                {t('about.description1')}{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.angularPrimitives')}</span>{' '}
+                {t('about.description2')}{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.company')}</span>.{' '}
+                {t('about.description3')}{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.angular')}</span>,{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.typescript')}</span>,{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.react')}</span>,{' '}
+                {t('about.and')}{' '}
+                <span className="text-[#EDEDEF] font-medium">{t('about.microfrontends')}</span>,{' '}
+                {t('about.description4')}
+              </p>
+            </div>
+
+            <div className="flex-shrink-0 mx-auto lg:mx-0">
+              <div className="w-40 h-48 rounded-xl overflow-hidden relative border border-[#2A2A2E]">
+                <picture>
+                  <source type="image/webp" srcSet="/avatar-160.webp 160w, /avatar-320.webp 320w" sizes="160px" />
+                  <img src="/avatar-160.jpg" srcSet="/avatar-160.jpg 160w, /avatar-320.jpg 320w" sizes="160px" alt="Eugene Rusakov" className="w-full h-full object-cover" width="160" height="192" loading="lazy" decoding="async" />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent" />
+              </div>
+            </div>
+          </div>
+
+          {/* Stats row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-0 mt-14 pt-10 border-t border-[#2A2A2E]">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex-1 sm:text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-[#EDEDEF] tracking-tight">{stat.value}</p>
+                <p className="font-mono text-xs mt-1 text-[#6B6B73]">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

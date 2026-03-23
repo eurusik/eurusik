@@ -1,31 +1,23 @@
 import { useTranslation } from '../../contexts/LanguageContext'
 
-const LanguageSwitcher = ({ scrolled = false }) => {
+const LanguageSwitcher = () => {
   const { locale } = useTranslation()
 
   return (
     <div className="flex items-center gap-1 sm:gap-1.5">
       <a
         href="/"
-        className={`px-1 sm:px-1.5 py-0.5 text-xs sm:text-sm font-semibold transition-all duration-300 rounded ${
-          locale === 'uk'
-            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-            : scrolled
-            ? 'text-gray-600 hover:text-blue-600'
-            : 'text-white/70 hover:text-white'
+        className={`px-1.5 sm:px-2 py-0.5 text-xs sm:text-sm font-medium transition-all duration-200 rounded ${
+          locale === 'uk' ? 'font-semibold text-emerald-500 bg-emerald-500/10' : 'text-[#6B6B73]'
         }`}
       >
         UA
       </a>
-      <span className={`text-xs sm:text-sm ${scrolled ? 'text-gray-400' : 'text-white/50'}`}>|</span>
+      <span className="text-xs sm:text-sm text-[#3A3A3F]">|</span>
       <a
         href="/en"
-        className={`px-1 sm:px-1.5 py-0.5 text-xs sm:text-sm font-semibold transition-all duration-300 rounded ${
-          locale === 'en'
-            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-            : scrolled
-            ? 'text-gray-600 hover:text-blue-600'
-            : 'text-white/70 hover:text-white'
+        className={`px-1.5 sm:px-2 py-0.5 text-xs sm:text-sm font-medium transition-all duration-200 rounded ${
+          locale === 'en' ? 'font-semibold text-emerald-500 bg-emerald-500/10' : 'text-[#6B6B73]'
         }`}
       >
         EN

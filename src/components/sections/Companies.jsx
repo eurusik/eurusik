@@ -1,144 +1,44 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from '../../contexts/LanguageContext'
-import { companiesData } from '../../locales/companiesData'
 
 const Companies = () => {
   const { locale } = useTranslation()
-  const data = companiesData[locale]
-  
+
   const companies = [
-    {
-      name: "Сільпо",
-      logo: "/logos/silpo.svg",
-      description: "Ukraine's leading retail chain",
-      url: "https://silpo.ua"
-    },
-    {
-      name: "Rozetka",
-      logo: "/logos/rozetka.png", 
-      description: "Ukraine's largest e-commerce platform",
-      url: "https://rozetka.ua"
-    },
-    {
-      name: "Mastercard",
-      logo: "/logos/mastercard.svg",
-      description: "Global financial services leader",
-      url: "https://mastercard.ua"
-    },
-    {
-      name: "Electronic Arts",
-      logo: "/logos/ea.svg",
-      description: "Global gaming industry leader",
-      url: "https://ea.com"
-    }
+    { name: "Silpo", logo: "/logos/silpo.svg", url: "https://silpo.ua", size: "h-10 max-w-[140px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
+    { name: "Rozetka", logo: "/logos/rozetka.png", url: "https://rozetka.ua", size: "h-10 max-w-[140px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
+    { name: "Mastercard", logo: "/logos/mastercard.svg", url: "https://mastercard.ua", size: "h-10 max-w-[100px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
+    { name: "Electronic Arts", logo: "/logos/ea.svg", url: "https://ea.com", size: "h-[72px] w-[72px]", filter: "opacity-60 brightness-0 invert" }
   ]
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-4 font-heading">
-            {data.title}
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            {data.subtitle}
-          </p>
-        </motion.div>
+    <section className="py-16 px-6 border-t border-[#2A2A2E] bg-[#0A0A0B]">
+      <div className="max-w-3xl mx-auto">
+        <p className="text-center text-xs font-mono tracking-[0.2em] uppercase text-[#6B6B73] mb-10">
+          {locale === 'uk' ? 'Працював з' : 'Worked with'}
+        </p>
 
-        {/* Mobile: Horizontal scroll, Desktop: Grid */}
-        <div className="md:hidden overflow-x-auto pb-4">
-          <div className="flex gap-6 px-4" style={{ width: 'max-content' }}>
-            {companies.map((company, index) => (
-              <motion.div
-                key={company.name}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1 
-                }}
-                viewport={{ once: true }}
-                className="group flex-shrink-0"
-                style={{ width: '280px' }}
-              >
-                <a 
-                  href={company.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <div className="glass-card rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full">
-                    <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-white rounded-xl shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                      <img 
-                        src={company.logo} 
-                        alt={`${company.name} logo`}
-                        className="w-14 h-14 object-contain"
-                        width="56"
-                        height="56"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">
-                      {company.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      {data.companies[index]?.description || company.description}
-                    </p>
-                  </div>
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop: Grid layout */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {companies.map((company, index) => (
-            <motion.div
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+          {companies.map((company) => (
+            <motion.a
               key={company.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1 
-              }}
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="group"
+              className="w-full h-16 flex items-center justify-center group"
             >
-              <a 
-                href={company.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="glass-card rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
-                  <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-xl shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                    <img 
-                      src={company.logo} 
-                      alt={`${company.name} logo`}
-                      className="w-16 h-16 object-contain"
-                      width="64"
-                      height="64"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2 font-heading group-hover:text-blue-600 transition-colors duration-300">
-                    {company.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {data.companies[index]?.description || company.description}
-                  </p>
-                </div>
-              </a>
-            </motion.div>
+              <img
+                src={company.logo}
+                alt={company.name}
+                className={`${company.size} w-auto object-contain ${company.filter} transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 group-hover:invert-0`}
+                loading="lazy"
+                decoding="async"
+              />
+            </motion.a>
           ))}
         </div>
       </div>
