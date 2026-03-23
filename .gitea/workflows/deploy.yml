@@ -21,12 +21,20 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install Docker CLI
+        run: |
+          apt-get update && apt-get install -y docker.io
+          export DOCKER_HOST=tcp://localhost:2375
+          docker version
+
       - name: Build Docker image
         run: |
+          export DOCKER_HOST=tcp://localhost:2375
           docker build -t git.lab.home/eurusik/eurusik.tech:${{ github.sha }} -t git.lab.home/eurusik/eurusik.tech:latest .
 
       - name: Push to Registry
         run: |
+          export DOCKER_HOST=tcp://localhost:2375
           echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
           docker push git.lab.home/eurusik/eurusik.tech:${{ github.sha }}
           docker push git.lab.home/eurusik/eurusik.tech:latest
