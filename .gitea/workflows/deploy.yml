@@ -4,18 +4,9 @@ on:
   push:
     branches: [main]
 
-env:
-  DOCKER_HOST: tcp://localhost:2375
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:dind
-        options: --privileged
-        env:
-          DOCKER_TLS_CERTDIR: ""
     steps:
       - uses: actions/checkout@v4
 
@@ -27,19 +18,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build app
         run: npm run build
 
-      - name: Wait for Docker
-        run: |
-          for i in $(seq 1 30); do
-            docker version && break || sleep 2
-          done
+      - name: Prepare Docker context
+        run: tar -czf /tmp/context.tar.gz .
 
-      - name: Build Docker image
-        run: docker build -t git.lab.home/eurusik/eurusik.tech:latest .
-
-      - name: Push to Registry
-        run: |
-          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
-          docker push git.lab.home/eurusik/eurusik.tech:latest
+      - name: Build and Push with Kaniko
+        uses: docker://gcr.io/kaniko-project/executor:v1.23.2-debug
+        with:
+          args: >-
+            --context=tar:///tmp/context.tar.gz
+            --dockerfile=Dockerfile
+            --destination=git.lab.home/eurusik/eurusik.tech:latest
+            --insecure
+            --skip-tls-verify
