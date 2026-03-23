@@ -4,9 +4,18 @@ on:
   push:
     branches: [main]
 
+env:
+  DOCKER_HOST: tcp://localhost:2375
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        env:
+          DOCKER_TLS_CERTDIR: ""
     steps:
       - uses: actions/checkout@v4
 
@@ -21,20 +30,16 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Install Docker CLI
+      - name: Wait for Docker
         run: |
-          apt-get update && apt-get install -y docker.io
-          export DOCKER_HOST=tcp://localhost:2375
-          docker version
+          for i in $(seq 1 30); do
+            docker version && break || sleep 2
+          done
 
       - name: Build Docker image
-        run: |
-          export DOCKER_HOST=tcp://localhost:2375
-          docker build -t git.lab.home/eurusik/eurusik.tech:${{ github.sha }} -t git.lab.home/eurusik/eurusik.tech:latest .
+        run: docker build -t git.lab.home/eurusik/eurusik.tech:latest .
 
       - name: Push to Registry
         run: |
-          export DOCKER_HOST=tcp://localhost:2375
           echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
-          docker push git.lab.home/eurusik/eurusik.tech:${{ github.sha }}
           docker push git.lab.home/eurusik/eurusik.tech:latest
