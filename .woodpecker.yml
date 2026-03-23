@@ -2,6 +2,8 @@ steps:
   - name: build
     image: gcr.io/kaniko-project/executor:debug
     commands:
+      - mkdir -p /kaniko/.docker
+      - echo "{\"auths\":{\"git.lab.home\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - >
         /kaniko/executor
         --context=dir:///woodpecker/src
@@ -11,15 +13,11 @@ steps:
         --insecure
         --skip-tls-verify
     environment:
-      DOCKER_CONFIG: /kaniko/.docker
-    secrets: [registry_user, registry_password]
-
-  - name: deploy
-    image: bitnami/kubectl:latest
-    commands:
-      - kubectl set image deployment/eurusik-app eurusik-app=git.lab.home/eurusik/eurusik.tech:${CI_COMMIT_SHA:0:7} -n eurusik-app
-      - kubectl rollout status deployment/eurusik-app -n eurusik-app --timeout=120s
+      REGISTRY_USER:
+        from_secret: registry_user
+      REGISTRY_PASSWORD:
+        from_secret: registry_password
 
 when:
-  branch: main
-  event: push
+  - branch: main
+    event: push
