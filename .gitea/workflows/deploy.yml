@@ -21,15 +21,16 @@ jobs:
       - name: Build app
         run: npm run build
 
-      - name: Prepare Docker context
-        run: tar -czf /tmp/context.tar.gz .
+      - name: Install Docker CLI
+        run: |
+          curl -fsSL https://get.docker.com | sh
+          export DOCKER_HOST=tcp://host.docker.internal:2375
+          docker version || true
 
-      - name: Build and Push with Kaniko
-        uses: docker://gcr.io/kaniko-project/executor:v1.23.2-debug
-        with:
-          args: >-
-            --context=tar:///tmp/context.tar.gz
-            --dockerfile=Dockerfile
-            --destination=git.lab.home/eurusik/eurusik.tech:latest
-            --insecure
-            --skip-tls-verify
+      - name: Build and Push
+        env:
+          DOCKER_HOST: tcp://172.17.0.1:2375
+        run: |
+          docker build -t git.lab.home/eurusik/eurusik.tech:latest .
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
+          docker push git.lab.home/eurusik/eurusik.tech:latest
