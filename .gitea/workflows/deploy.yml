@@ -25,6 +25,8 @@ jobs:
         run: apt-get update -qq && apt-get install -y -qq docker.io > /dev/null 2>&1
 
       - name: Build and Push Docker image
+        env:
+          DOCKER_HOST: tcp://172.17.0.1:2375
         run: |
           docker build -t git.lab.home/eurusik/eurusik.tech:latest .
           echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login git.lab.home --username ${{ secrets.REGISTRY_USER }} --password-stdin
