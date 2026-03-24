@@ -9,15 +9,12 @@ export const useEasterEgg = () => {
     let pos = 0
 
     console.log(
-      '%c  \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n' +
-      '  \u2551  \uD83D\uDC4B Hey there, fellow developer! \u2551\n' +
-      '  \u2551                                  \u2551\n' +
-      '  \u2551  Like what you see?              \u2551\n' +
-      '  \u2551  github.com/eurusik              \u2551\n' +
-      '  \u2551                                  \u2551\n' +
-      '  \u2551  Try the Konami code ;)          \u2551\n' +
-      '  \u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D',
-      'color: #10B981; font-family: monospace; font-size: 12px;'
+      '%c\n' +
+      '  Hey there, fellow developer! \uD83D\uDC4B\n\n' +
+      '  Like what you see?\n' +
+      '  github.com/eurusik\n\n' +
+      '  Try the Konami code ;)\n',
+      'color: #10B981; font-family: monospace; font-size: 13px; background: #111113; padding: 12px 16px; border: 1px solid #2A2A2E; border-radius: 8px; line-height: 1.8;'
     )
 
     const handler = (e) => {
