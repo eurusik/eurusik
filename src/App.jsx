@@ -13,8 +13,11 @@ import Testimonials from './components/sections/Testimonials'
 import Contact from './components/sections/Contact'
 import Footer from './components/layout/Footer'
 import BackToTop from './components/ui/BackToTop'
+import { useEasterEgg } from './hooks'
 
 function App({ locale = 'uk' }) {
+  useEasterEgg()
+
   return (
     <LanguageProvider locale={locale}>
       <LazyMotion features={domAnimation}>

@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from '../../contexts/LanguageContext'
 
+const STORAGE_KEY = 'codeblock-played'
+
 const CodeBlock = () => {
   const { locale } = useTranslation()
-  const [displayedLines, setDisplayedLines] = useState(0)
+  const hasPlayed = typeof window !== 'undefined' && sessionStorage.getItem(STORAGE_KEY)
 
   const codeLines = useMemo(() => locale === 'uk' ? [
     { type: 'first' },
@@ -25,16 +27,21 @@ const CodeBlock = () => {
     { type: 'last' },
   ], [locale])
 
+  const [displayedLines, setDisplayedLines] = useState(hasPlayed ? codeLines.length : 0)
+
   useEffect(() => {
     setDisplayedLines(0)
   }, [locale])
 
   useEffect(() => {
     if (displayedLines < codeLines.length) {
-      const timer = setTimeout(() => setDisplayedLines(prev => prev + 1), 150)
+      const speed = hasPlayed ? 30 : 150
+      const timer = setTimeout(() => setDisplayedLines(prev => prev + 1), speed)
       return () => clearTimeout(timer)
+    } else if (displayedLines === codeLines.length && typeof window !== 'undefined') {
+      sessionStorage.setItem(STORAGE_KEY, '1')
     }
-  }, [displayedLines, codeLines.length])
+  }, [displayedLines, codeLines.length, hasPlayed])
 
   const cursor = <span className="animate-cursor-blink inline-block w-[7px] h-[18px] align-middle ml-0.5 bg-emerald-500" />
 
@@ -51,7 +58,7 @@ const CodeBlock = () => {
       </div>
 
       {/* Code */}
-      <div className="p-5 font-mono text-[13px] leading-7 overflow-hidden">
+      <div className="p-5 font-mono text-[13px] leading-7 overflow-x-auto">
         {displayedLines >= 1 && (
           <div>
             <span className="text-purple-400">const</span>

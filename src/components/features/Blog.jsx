@@ -114,6 +114,20 @@ const Blog = () => {
           <div className="flex justify-center items-center py-20">
             <div className="w-8 h-8 rounded-full animate-spin border-2 border-[#2A2A2E] border-t-emerald-500" />
           </div>
+        ) : douArticles.length === 0 && mediumArticles.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-[#6B6B73] text-sm mb-4">{t('blog.error')}</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a href="https://dou.ua/users/john-rusakov/" target="_blank" rel="noopener noreferrer" className="btn-ghost inline-flex items-center gap-2 text-sm">
+                <DOUIcon size={16} />DOU
+                <ExternalLink size={14} />
+              </a>
+              <a href="https://medium.com/@eurusik" target="_blank" rel="noopener noreferrer" className="btn-ghost inline-flex items-center gap-2 text-sm">
+                <MediumIcon size={16} />Medium
+                <ExternalLink size={14} />
+              </a>
+            </div>
+          </div>
         ) : (
           <>
             {douArticles.length > 0 && (
