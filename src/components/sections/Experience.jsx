@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ChevronDown, ChevronUp, Mail } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import { experienceData } from '../../locales/experienceData'
@@ -7,7 +7,7 @@ import SectionLabel from '../layout/SectionLabel'
 
 const Experience = () => {
   const [showAll, setShowAll] = useState(false)
-  const { locale } = useTranslation()
+  const { t, locale } = useTranslation()
   const data = experienceData[locale]
 
   const experiences = [
@@ -73,7 +73,7 @@ const Experience = () => {
   return (
     <section id="experience" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]" aria-labelledby="experience-heading">
       <div className="max-w-4xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -84,13 +84,13 @@ const Experience = () => {
           <h2 id="experience-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {data.title}
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="relative">
           <div className="absolute left-3 top-2 bottom-2 w-px bg-[#2A2A2E]" />
 
           {visibleExperiences.map((exp, index) => (
-            <motion.div
+            <m.div
               key={index}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -131,12 +131,12 @@ const Experience = () => {
                   <span key={techIndex} className="tag-default">{tech}</span>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {experiences.length > 4 && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
@@ -146,11 +146,11 @@ const Experience = () => {
             <button onClick={() => setShowAll(!showAll)} className="btn-text inline-flex items-center gap-1 text-sm">
               {showAll ? <><ChevronUp size={16} />{data.showLess}</> : <><ChevronDown size={16} />{data.showMore} ({experiences.length - 4})</>}
             </button>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Mid-page CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -158,16 +158,16 @@ const Experience = () => {
           className="mt-16 pt-12 border-t border-[#2A2A2E] text-center"
         >
           <p className="text-lg sm:text-xl text-[#A0A0A8] mb-6">
-            {locale === 'uk' ? 'Зацікавлені? Давайте поговоримо.' : 'Interested? Let\'s talk.'}
+            {t('experience.interested')}
           </p>
           <a
             href="mailto:john.rusakov@gmail.com?subject=Let's Work Together"
             className="btn-accent inline-flex items-center gap-2 text-base"
           >
             <Mail size={18} />
-            {locale === 'uk' ? 'Зв\'язатися' : 'Get in Touch'}
+            {t('experience.getInTouch')}
           </a>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

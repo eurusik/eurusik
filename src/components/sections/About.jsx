@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
@@ -14,7 +14,7 @@ const About = () => {
   return (
     <section id="about" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]">
       <div className="max-w-4xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -60,7 +60,7 @@ const About = () => {
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

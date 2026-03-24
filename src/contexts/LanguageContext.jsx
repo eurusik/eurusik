@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useCallback, useMemo } from 'react'
 import en from '../locales/en.json'
 import uk from '../locales/uk.json'
 
@@ -13,19 +13,21 @@ const LanguageContext = createContext({
 })
 
 export const LanguageProvider = ({ locale = 'uk', children }) => {
-  const t = (key) => {
+  const t = useCallback((key) => {
     const keys = key.split('.')
     let value = translations[locale]
-    
+
     for (const k of keys) {
       value = value?.[k]
     }
-    
+
     return value || key
-  }
+  }, [locale])
+
+  const contextValue = useMemo(() => ({ locale, t }), [locale, t])
 
   return (
-    <LanguageContext.Provider value={{ locale, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   )

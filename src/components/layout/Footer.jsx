@@ -1,21 +1,9 @@
-import { Github, Linkedin } from 'lucide-react'
-import { MediumIcon, ThreadsIcon, DOUIcon } from '../ui/icons'
+import SocialIcon from '../ui/SocialIcon'
 import { SOCIAL_LINKS } from '../../config'
 import { useTranslation } from '../../contexts/LanguageContext'
 
 const Footer = () => {
   const { t } = useTranslation()
-
-  const getIcon = (iconName, size = 18) => {
-    const iconMap = {
-      github: <Github size={size} />,
-      linkedin: <Linkedin size={size} />,
-      medium: <MediumIcon size={size} />,
-      threads: <ThreadsIcon size={size} />,
-      dou: <DOUIcon size={size} />
-    }
-    return iconMap[iconName]
-  }
 
   return (
     <footer className="py-12 px-6 bg-[#0A0A0B] border-t border-[#2A2A2E]">
@@ -30,7 +18,7 @@ const Footer = () => {
               className="text-[#6B6B73] hover:text-[#EDEDEF] transition-colors duration-200"
               aria-label={link.name}
             >
-              {getIcon(link.icon)}
+              <SocialIcon name={link.icon} />
             </a>
           ))}
         </div>

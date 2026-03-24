@@ -35,8 +35,8 @@ export const useGitHubActivity = () => {
       setStats(userStats)
       
       // Only set error if we have absolutely no data
-      if (eventsData.length === 0 && stats.repos === 0) {
-        setError('Limited data available due to API restrictions')
+      if (eventsData.length === 0 && userStats.repos === 0) {
+        setError('Limited data available')
       } else {
         setError(null)
       }

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, MapPin, Send } from 'lucide-react'
+import { m } from 'framer-motion'
+import { Mail, Github, Linkedin, MapPin, Send, Download } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
@@ -16,7 +16,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 px-6 bg-[#0A0A0B] border-t border-[#2A2A2E]" aria-labelledby="contact-heading">
       <div className="max-w-4xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -30,9 +30,9 @@ const Contact = () => {
           <p className="text-base text-[#A0A0A8]">
             {t('contact.subtitle')}
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
@@ -57,20 +57,26 @@ const Contact = () => {
               <div key={index}>{content}</div>
             )
           })}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
           viewport={{ once: true }}
           className="text-center"
         >
-          <a href="mailto:john.rusakov@gmail.com?subject=Let's Work Together&body=Hi Eugene, I'd like to discuss a project with you." className="btn-accent inline-flex items-center gap-3 text-lg px-10 py-4">
-            <Send size={20} />
-            {t('contact.hireMe')}
-          </a>
-        </motion.div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:john.rusakov@gmail.com?subject=Let's Work Together&body=Hi Eugene, I'd like to discuss a project with you." className="btn-accent inline-flex items-center gap-3 text-lg px-10 py-4">
+              <Send size={20} />
+              {t('contact.hireMe')}
+            </a>
+            <a href="/eugene-rusakov-cv.pdf" download className="btn-ghost inline-flex items-center gap-2 text-base">
+              <Download size={18} />
+              {t('hero.downloadCV')}
+            </a>
+          </div>
+        </m.div>
       </div>
     </section>
   )

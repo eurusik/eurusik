@@ -4,7 +4,9 @@
     "title": "Senior Frontend Developer | Tech Lead",
     "subtitle": "11+ years of experience in React, Angular & TypeScript",
     "contactMe": "Contact Me",
-    "downloadCV": "Download CV"
+    "downloadCV": "Download CV",
+    "available": "Available for work",
+    "getInTouch": "Get in Touch"
   },
   "about": {
     "title": "About Me",
@@ -34,10 +36,13 @@
     "title": "Companies I've Worked With",
     "subtitle": "Experience with global and Ukrainian tech leaders",
     "current": "Current Workplace",
-    "viewAll": "View All Experience"
+    "viewAll": "View All Experience",
+    "workedWith": "Worked with"
   },
   "experience": {
-    "title": "Work Experience"
+    "title": "Work Experience",
+    "interested": "Interested? Let's talk.",
+    "getInTouch": "Get in Touch"
   },
   "skills": {
     "title": "Skills & Technologies"

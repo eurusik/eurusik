@@ -1,3 +1,4 @@
+import { LazyMotion, domAnimation } from 'framer-motion'
 import { LanguageProvider } from './contexts/LanguageContext'
 import Header from './components/layout/Header'
 import Hero from './components/sections/Hero'
@@ -16,23 +17,25 @@ import BackToTop from './components/ui/BackToTop'
 function App({ locale = 'uk' }) {
   return (
     <LanguageProvider locale={locale}>
-      <div className="min-h-screen bg-[#0A0A0B]">
-        <Header />
-        <main>
-          <Hero />
-          <About />
-          <Companies />
-          <Experience />
-          <Skills />
-          <Education />
-          <Blog />
-          <GitHubActivity />
-          <Testimonials />
-          <Contact />
-        </main>
-        <Footer />
-        <BackToTop />
-      </div>
+      <LazyMotion features={domAnimation}>
+        <div className="min-h-screen bg-[#0A0A0B]">
+          <Header />
+          <main>
+            <Hero />
+            <About />
+            <Companies />
+            <Experience />
+            <Skills />
+            <Education />
+            <Blog />
+            <GitHubActivity />
+            <Testimonials />
+            <Contact />
+          </main>
+          <Footer />
+          <BackToTop />
+        </div>
+      </LazyMotion>
     </LanguageProvider>
   )
 }

@@ -46,7 +46,7 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    target: 'es2015',
+    target: 'es2022',
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,

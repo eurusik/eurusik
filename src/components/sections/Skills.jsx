@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
@@ -55,7 +55,7 @@ const Skills = () => {
   return (
     <section id="skills" className="py-24 px-6 bg-[#0A0A0B] border-t border-[#2A2A2E]" aria-labelledby="skills-heading">
       <div className="max-w-5xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -66,9 +66,9 @@ const Skills = () => {
           <h2 id="skills-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('skills.title')}
           </h2>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
@@ -92,7 +92,7 @@ const Skills = () => {
               </ul>
             </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

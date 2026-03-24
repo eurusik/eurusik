@@ -4,7 +4,9 @@
     "title": "Senior Frontend Розробник | Tech Lead",
     "subtitle": "11+ років досвіду в React, Angular та TypeScript",
     "contactMe": "Зв'язатися зі мною",
-    "downloadCV": "Завантажити резюме"
+    "downloadCV": "Завантажити резюме",
+    "available": "Відкритий до пропозицій",
+    "getInTouch": "Зв'язатися"
   },
   "about": {
     "title": "Про мене",
@@ -34,10 +36,13 @@
     "title": "Компанії, з якими я працював",
     "subtitle": "Досвід роботи у світових та українських tech лідерах",
     "current": "Поточне місце роботи",
-    "viewAll": "Дивитись весь досвід"
+    "viewAll": "Дивитись весь досвід",
+    "workedWith": "Працював з"
   },
   "experience": {
-    "title": "Досвід роботи"
+    "title": "Досвід роботи",
+    "interested": "Зацікавлені? Давайте поговоримо.",
+    "getInTouch": "Зв'язатися"
   },
   "skills": {
     "title": "Навички та технології"

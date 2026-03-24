@@ -1,21 +1,28 @@
-import { Github, Linkedin } from 'lucide-react'
-import { MediumIcon, ThreadsIcon, DOUIcon } from '../ui/icons'
+import SocialIcon from '../ui/SocialIcon'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
 import { SOCIAL_LINKS } from '../../config'
 import { useScrolled } from '../../hooks'
+import { useTranslation } from '../../contexts/LanguageContext'
+
+const NAV_LINKS = [
+  { labelKey: 'nav.about', href: '#about' },
+  { labelKey: 'nav.experience', href: '#experience' },
+  { labelKey: 'nav.skills', href: '#skills' },
+  { labelKey: 'nav.blog', href: '#blog' },
+  { labelKey: 'nav.contact', href: '#contact' },
+]
 
 const Header = () => {
   const scrolled = useScrolled(50)
+  const { t } = useTranslation()
 
-  const getIcon = (iconName, size = 18) => {
-    const iconMap = {
-      github: <Github size={size} />,
-      linkedin: <Linkedin size={size} />,
-      medium: <MediumIcon size={size} />,
-      threads: <ThreadsIcon size={size} />,
-      dou: <DOUIcon size={size} />
-    }
-    return iconMap[iconName]
+  const handleNavClick = (e, href) => {
+    e.preventDefault()
+    const id = href.replace('#', '')
+    const el = document.getElementById(id)
+    if (!el) return
+    const top = el.getBoundingClientRect().top + window.scrollY - 56
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (
@@ -32,6 +39,19 @@ const Header = () => {
             </a>
           </div>
 
+          <div className="hidden md:flex items-center gap-5 lg:gap-6">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-xs font-medium text-[#6B6B73] hover:text-[#EDEDEF] transition-colors"
+              >
+                {t(link.labelKey)}
+              </a>
+            ))}
+          </div>
+
           <div className="flex items-center gap-1 sm:gap-1.5 md:gap-4 flex-shrink-0">
             <LanguageSwitcher />
             <div className="hidden md:flex items-center gap-4 lg:gap-5 ml-2">
@@ -45,7 +65,7 @@ const Header = () => {
                   aria-label={link.name}
                   title={link.name}
                 >
-                  {getIcon(link.icon)}
+                  <SocialIcon name={link.icon} />
                 </a>
               ))}
             </div>

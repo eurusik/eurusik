@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from '../../contexts/LanguageContext'
 
 const CodeBlock = () => {
   const { locale } = useTranslation()
   const [displayedLines, setDisplayedLines] = useState(0)
 
-  const codeLines = locale === 'uk' ? [
+  const codeLines = useMemo(() => locale === 'uk' ? [
     { type: 'first' },
     { indent: true, key: 'role', value: '"Senior Frontend Engineer"' },
     { indent: true, key: 'experience', value: '"11+ років"' },
@@ -23,7 +23,11 @@ const CodeBlock = () => {
     { indent: true, key: 'location', value: '"Kyiv, Ukraine"' },
     { indent: true, key: 'available', value: 'true', isBool: true },
     { type: 'last' },
-  ]
+  ], [locale])
+
+  useEffect(() => {
+    setDisplayedLines(0)
+  }, [locale])
 
   useEffect(() => {
     if (displayedLines < codeLines.length) {

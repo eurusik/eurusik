@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { BookOpen, ExternalLink, Calendar } from 'lucide-react'
 import { MediumIcon, DOUIcon } from '../ui/icons'
 import { MEDIUM_CONFIG, DOU_CONFIG } from '../../config'
@@ -20,7 +20,7 @@ const Blog = () => {
   }
 
   const renderArticle = (article, index) => (
-    <motion.article
+    <m.article
       key={index}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -91,13 +91,13 @@ const Blog = () => {
           </span>
         </div>
       </a>
-    </motion.article>
+    </m.article>
   )
 
   return (
     <section id="blog" className="py-24 px-6 min-h-section bg-[#0A0A0B] border-t border-[#2A2A2E]" aria-labelledby="blog-heading">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -108,7 +108,7 @@ const Blog = () => {
           <h2 id="blog-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('blog.title')}
           </h2>
-        </motion.div>
+        </m.div>
 
         {loading ? (
           <div className="flex justify-center items-center py-20">

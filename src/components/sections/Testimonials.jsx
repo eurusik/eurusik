@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Linkedin } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
@@ -33,7 +33,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]" aria-labelledby="testimonials-heading">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -44,11 +44,11 @@ const Testimonials = () => {
           <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('testimonials.title')}
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <motion.div
+            <m.div
               key={index}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -72,11 +72,11 @@ const Testimonials = () => {
                   <h3 className="font-semibold text-sm text-[#EDEDEF]">{testimonial.name}</h3>
                   <p className="text-xs text-[#6B6B73]">{testimonial.position}</p>
                 </div>
-                <a href={testimonial.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#6B6B73] hover:text-emerald-500 transition-colors duration-200 flex-shrink-0">
+                <a href={testimonial.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#6B6B73] hover:text-emerald-500 transition-colors duration-200 flex-shrink-0" aria-label="View recommendation on LinkedIn">
                   <Linkedin size={16} />
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

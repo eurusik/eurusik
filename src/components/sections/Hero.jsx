@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import CodeBlock from '../ui/CodeBlock'
@@ -7,7 +7,10 @@ const Hero = () => {
   const { t, locale } = useTranslation()
 
   const scrollToContact = () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
+    const el = document.getElementById('contact')
+    if (!el) return
+    const top = el.getBoundingClientRect().top + window.scrollY - 56
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (
@@ -21,7 +24,7 @@ const Hero = () => {
       <div className="relative z-10 w-full max-w-6xl mx-auto py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Text */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -30,11 +33,11 @@ const Hero = () => {
             {/* Availability status */}
             <div className="flex items-center gap-2 justify-center lg:justify-start mb-6">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span aria-hidden="true" className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span className="font-mono text-xs text-emerald-500">
-                {locale === 'uk' ? 'Відкритий до пропозицій' : 'Available for work'}
+                {t('hero.available')}
               </span>
             </div>
 
@@ -58,17 +61,17 @@ const Hero = () => {
               <Mail size={18} />
               {t('hero.contactMe')}
             </button>
-          </motion.div>
+          </m.div>
 
           {/* Right: Code Block */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full lg:w-[45%] flex-shrink-0"
           >
             <CodeBlock />
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

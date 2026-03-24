@@ -1,9 +1,17 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Github, GitBranch, GitCommit, GitPullRequest, Star, GitFork, Code } from 'lucide-react'
 import { useGitHubActivity } from '../../hooks'
 import { GITHUB_CONFIG } from '../../config'
 import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
+
+const getColor = (count) => {
+  if (count === 0) return '#232326'
+  if (count === 1) return 'rgba(16,185,129,0.2)'
+  if (count <= 3) return 'rgba(16,185,129,0.4)'
+  if (count <= 5) return 'rgba(16,185,129,0.65)'
+  return '#10B981'
+}
 
 const GitHubActivity = () => {
   const { t, locale } = useTranslation()
@@ -58,14 +66,6 @@ const GitHubActivity = () => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
-  const getColor = (count) => {
-    if (count === 0) return '#232326'
-    if (count === 1) return 'rgba(16,185,129,0.2)'
-    if (count <= 3) return 'rgba(16,185,129,0.4)'
-    if (count <= 5) return 'rgba(16,185,129,0.65)'
-    return '#10B981'
-  }
-
   const groupByWeeks = (contribs) => {
     const weeks = []; let week = []
     contribs.forEach((day, i) => {
@@ -83,10 +83,10 @@ const GitHubActivity = () => {
   return (
     <section id="github-activity" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]" aria-labelledby="github-heading">
       <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} viewport={{ once: true }} className="mb-12">
+        <m.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} viewport={{ once: true }} className="mb-12">
           <SectionLabel number="06" label="OPEN SOURCE" />
           <h2 id="github-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">{t('github.title')}</h2>
-        </motion.div>
+        </m.div>
 
         {loading ? (
           <div className="flex justify-center items-center py-20">
@@ -95,7 +95,7 @@ const GitHubActivity = () => {
         ) : (
           <>
             {/* Stats */}
-            <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} viewport={{ once: true }} className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-0 mb-14">
+            <m.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} viewport={{ once: true }} className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-0 mb-14">
               <div className="flex-1 sm:text-center">
                 <p className="text-3xl sm:text-4xl font-bold text-[#EDEDEF]">{stats.repos}</p>
                 <p className="font-mono text-xs mt-1 text-[#6B6B73]">{t('github.stats.repos')}</p>
@@ -110,10 +110,10 @@ const GitHubActivity = () => {
                 <p className="text-3xl sm:text-4xl font-bold text-[#EDEDEF]">{contribStats.streak} <span className="text-lg font-normal text-[#6B6B73]">{t('github.stats.days')}</span></p>
                 <p className="font-mono text-xs mt-1 text-[#6B6B73]">{t('github.stats.currentStreak')}</p>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Activity */}
-            <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} viewport={{ once: true }} className="mb-14">
+            <m.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} viewport={{ once: true }} className="mb-14">
               <h3 className="text-lg font-semibold mb-4 text-[#EDEDEF]">{t('github.recentActivity')}</h3>
               <div className="border-t border-[#2A2A2E]">
                 {events.map((event) => {
@@ -130,10 +130,10 @@ const GitHubActivity = () => {
                   )
                 })}
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Contribution Graph */}
-            <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} viewport={{ once: true }} className="mb-12">
+            <m.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} viewport={{ once: true }} className="mb-12">
               <h3 className="text-lg font-semibold mb-4 text-[#EDEDEF]">{t('github.contributionGraph')}</h3>
               <div className="card-surface p-4 md:p-6 overflow-hidden">
                 <div className="w-full overflow-x-auto scrollbar-thin">
@@ -169,7 +169,7 @@ const GitHubActivity = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             <div className="text-center">
               <a href={`https://github.com/${GITHUB_CONFIG.username}`} target="_blank" rel="noopener noreferrer" className="btn-ghost inline-flex items-center gap-2 text-sm">
