@@ -46,3 +46,30 @@ jobs:
           git add apps/eurusik-app/deployment-eurusik-app.yaml
           git diff --cached --quiet || git commit -m "deploy(eurusik-app): update image to ${SHORT_SHA}"
           git push || true
+
+      - name: Cleanup old container images (keep last 5)
+        run: |
+          API="https://git.lab.home/api/v1"
+          AUTH="${{ secrets.REGISTRY_USER }}:${{ secrets.REGISTRY_PASSWORD }}"
+          PKG="eurusik.tech"
+          OWNER="eurusik"
+
+          # Get all versions sorted by created date
+          VERSIONS=$(curl -sk -u "${AUTH}" "${API}/packages/${OWNER}/container/${PKG}" \
+            | python3 -c "
+          import sys, json
+          versions = json.load(sys.stdin)
+          if isinstance(versions, list):
+              # Sort by created, newest first
+              versions.sort(key=lambda v: v.get('created_at', ''), reverse=True)
+              # Skip first 5 (keep them), print rest
+              for v in versions[5:]:
+                  if v.get('version') != 'latest':
+                      print(v['id'])
+          " 2>/dev/null) || true
+
+          for VID in $VERSIONS; do
+            echo "Deleting old image version: $VID"
+            curl -sk -u "${AUTH}" -X DELETE "${API}/packages/${OWNER}/container/${PKG}/${VID}" || true
+          done
+          echo "Cleanup done"
