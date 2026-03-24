@@ -4,19 +4,13 @@ const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRi
 
 export const useEasterEgg = () => {
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     let pos = 0
 
-    // Console greeting
     console.log(
-      '%c  ╔══════════════════════════════════╗\n' +
-      '  ║  👋 Hey there, fellow developer! ║\n' +
-      '  ║                                  ║\n' +
-      '  ║  Like what you see?              ║\n' +
-      '  ║  github.com/eurusik              ║\n' +
-      '  ║                                  ║\n' +
-      '  ║  Try the Konami code ;)          ║\n' +
-      '  ╚══════════════════════════════════╝',
-      'color: #10B981; font-family: monospace; font-size: 12px;'
+      '%c Hey there, fellow developer! 👋\n Like what you see? → github.com/eurusik\n Try the Konami code ;)',
+      'color: #10B981; font-family: monospace; font-size: 13px; line-height: 1.6;'
     )
 
     const handler = (e) => {
@@ -28,7 +22,7 @@ export const useEasterEgg = () => {
           document.body.style.filter = 'hue-rotate(180deg)'
           setTimeout(() => {
             document.body.style.filter = ''
-            alert('🎮 Achievement Unlocked!\n\nYou found the Easter egg.\nBuilt with ❤️ on a Raspberry Pi cluster.')
+            window.alert('Achievement Unlocked! You found the Easter egg.')
           }, 600)
         }
       } else {
