@@ -30,15 +30,15 @@ const Clippy = () => {
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 animate-fade-in" style={{ fontFamily: '"MS Sans Serif", "Microsoft Sans Serif", Tahoma, sans-serif' }}>
+    <div className="fixed bottom-6 left-6 z-50 animate-fade-in" style={{ fontFamily: '"MS Sans Serif", "Microsoft Sans Serif", Tahoma, sans-serif' }}>
       {/* Speech bubble */}
       <div
-        className="mb-2 p-3 max-w-[280px] text-[13px] leading-[1.4]"
+        className="mb-2 p-3 max-w-[260px] text-[12px] leading-[1.5]"
         style={{
           background: '#FFFFCC',
           color: '#000',
           border: '1px solid #000',
-          borderRadius: '8px 8px 8px 0',
+          borderRadius: '8px 8px 0 8px',
           boxShadow: '2px 2px 0 rgba(0,0,0,0.3)',
         }}
       >
@@ -86,7 +86,7 @@ const Clippy = () => {
       </div>
 
       {/* Clippy */}
-      <div className="text-[48px] leading-none select-none cursor-pointer" onClick={hire}>
+      <div className="text-[40px] leading-none select-none cursor-pointer" onClick={hire}>
         📎
       </div>
     </div>
