@@ -113,7 +113,7 @@ const Win98Dialog = () => {
 
         {/* Body */}
         <div className="p-4 flex gap-3 items-start">
-          <span className="text-[32px] leading-none select-none">{'\u26A0'}</span>
+          <span className="text-[32px] leading-none select-none" style={{ color: '#000' }}>{'\u26A0'}</span>
           <p className="text-[13px] leading-[1.4]" style={{ color: '#000' }}>
             Are you sure you want to leave without hiring this developer?
           </p>
