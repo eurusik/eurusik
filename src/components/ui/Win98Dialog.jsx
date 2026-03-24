@@ -75,6 +75,7 @@ const Win98Dialog = () => {
     fontSize: '12px',
     fontFamily: '"MS Sans Serif", Tahoma, sans-serif',
     minWidth: '70px',
+    color: '#000',
   }
 
   return (
@@ -100,7 +101,7 @@ const Win98Dialog = () => {
           className="flex items-center justify-between px-1 py-0.5 cursor-move select-none"
           style={{ background: 'linear-gradient(90deg, #000080, #1084D0)', color: '#fff' }}
         >
-          <span className="text-[12px] font-bold px-1">\u26A0 eurusik.exe</span>
+          <span className="text-[12px] font-bold px-1">{'\u26A0'} eurusik.exe</span>
           <button
             onClick={hire}
             className="px-1 text-[11px] leading-none"
@@ -112,7 +113,7 @@ const Win98Dialog = () => {
 
         {/* Body */}
         <div className="p-4 flex gap-3 items-start">
-          <span className="text-[32px] leading-none select-none">\u26A0</span>
+          <span className="text-[32px] leading-none select-none">{'\u26A0'}</span>
           <p className="text-[13px] leading-[1.4]" style={{ color: '#000' }}>
             Are you sure you want to leave without hiring this developer?
           </p>
