@@ -8,7 +8,22 @@ export const useEasterEgg = () => {
 
     let pos = 0
 
-    console.log('%c\uD83D\uDC4B Hey! Like what you see? \u2192 github.com/eurusik  |  Try the Konami code ;)', 'color: #10B981; font-size: 13px;')
+    console.log(
+      '%c    eugene.rusakov    ',
+      'color: #10B981; background: #111113; font-size: 20px; font-weight: bold; font-family: monospace; padding: 20px 40px; border: 2px solid #10B981; border-radius: 8px; text-shadow: 0 0 10px rgba(16,185,129,0.5);'
+    )
+    console.log(
+      '%cSenior Frontend Engineer %c// open to collaboration',
+      'color: #EDEDEF; font-size: 13px; font-family: monospace;',
+      'color: #6B6B73; font-size: 13px; font-family: monospace;'
+    )
+    console.log(
+      '%c\u2192 github.com/eurusik %c| %c\u2191\u2191\u2193\u2193\u2190\u2192\u2190\u2192BA %c= \uD83C\uDF1F',
+      'color: #10B981; font-size: 12px; font-family: monospace;',
+      'color: #3A3A3F; font-size: 12px;',
+      'color: #A0A0A8; font-size: 12px; font-family: monospace;',
+      'color: #6B6B73; font-size: 12px;'
+    )
 
     const handler = (e) => {
       if (e.key === KONAMI[pos]) {
