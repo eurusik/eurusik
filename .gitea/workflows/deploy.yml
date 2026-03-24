@@ -40,9 +40,9 @@ jobs:
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           git clone http://${{ secrets.REGISTRY_USER }}:${{ secrets.REGISTRY_PASSWORD }}@git.lab.home/eurusik/homelab.git /tmp/homelab
           cd /tmp/homelab
-          sed -i "s|image: git.lab.home/eurusik/eurusik.tech:.*|image: git.lab.home/eurusik/eurusik.tech:${SHORT_SHA}|" apps/eurusik-app/deployment.yaml
+          sed -i "s|image: git.lab.home/eurusik/eurusik.tech:.*|image: git.lab.home/eurusik/eurusik.tech:${SHORT_SHA}|" apps/eurusik-app/deployment-eurusik-app.yaml
           git config user.name "gitea-ci[bot]"
           git config user.email "ci@lab.home"
-          git add apps/eurusik-app/deployment.yaml
+          git add apps/eurusik-app/deployment-eurusik-app.yaml
           git diff --cached --quiet || git commit -m "deploy(eurusik-app): update image to ${SHORT_SHA}"
           git push || true
