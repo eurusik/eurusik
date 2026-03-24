@@ -24,7 +24,7 @@ spec:
       - name: eurusik-app
         # Docker образ з Gitea Container Registry
         # Тег автоматично оновлюється через Gitea CI
-        image: git.lab.home/eurusik/eurusik.tech:latest
+        image: git.lab.home/eurusik/eurusik.tech:e2c7b80
         imagePullPolicy: Always  # Завжди тягнути новий образ
         ports:
         - containerPort: 3001  # Node.js Express server
