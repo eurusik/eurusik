@@ -8,7 +8,7 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const Blog = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
   const { articles: mediumArticles, loading: mediumLoading } = useMediumArticles()
   const { articles: douArticles, loading: douLoading } = useDOUArticles()
   const [imageErrors, setImageErrors] = useState({})
@@ -104,7 +104,7 @@ const Blog = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <SectionLabel number="05" label={locale === 'uk' ? 'СТАТТІ' : 'ARTICLES'} />
+          <SectionLabel number="05" label={t('blog.sectionLabel')} />
           <h2 id="blog-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('blog.title')}
           </h2>
@@ -118,7 +118,7 @@ const Blog = () => {
           <>
             {douArticles.length > 0 && (
               <div className="mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="DOU articles">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {douArticles.map((article, index) => renderArticle(article, `dou-${index}`))}
                 </div>
                 <div className="text-center mt-8">
@@ -138,7 +138,7 @@ const Blog = () => {
 
             {mediumArticles.length > 0 && (
               <div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Medium articles">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {mediumArticles.map((article, index) => renderArticle(article, `medium-${index}`))}
                 </div>
                 <div className="text-center mt-8">

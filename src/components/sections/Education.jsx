@@ -4,7 +4,7 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const Education = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <section id="education" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]" aria-labelledby="education-heading">
@@ -15,7 +15,7 @@ const Education = () => {
           transition={{ duration: 0.4 }}
           viewport={{ once: true }}
         >
-          <SectionLabel number="04" label={locale === 'uk' ? 'ОСВІТА' : 'EDUCATION'} />
+          <SectionLabel number="04" label={t('education.sectionLabel')} />
           <h2 id="education-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF] mb-10">
             {t('education.title')}
           </h2>

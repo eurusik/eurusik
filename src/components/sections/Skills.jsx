@@ -3,11 +3,11 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const Skills = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
 
   const skillGroups = [
     {
-      label: locale === 'uk' ? 'Фреймворки' : 'Frameworks',
+      label: t('skills.frameworks'),
       skills: [
         { name: 'Angular', primary: true },
         { name: 'React', primary: true },
@@ -17,35 +17,37 @@ const Skills = () => {
       ]
     },
     {
-      label: locale === 'uk' ? 'Мови' : 'Languages',
+      label: t('skills.languages'),
       skills: [
         { name: 'TypeScript', primary: true },
         { name: 'JavaScript', primary: true },
       ]
     },
     {
-      label: locale === 'uk' ? 'Інфраструктура' : 'Infrastructure',
+      label: t('skills.backend'),
       skills: [
         { name: 'Node.js' },
-        { name: 'Docker' },
-        { name: 'Kubernetes' },
-        { name: 'Git', primary: true },
+        { name: 'NestJS' },
+        { name: 'WebSockets' },
         { name: 'REST / GraphQL' },
+        { name: 'Git' },
       ]
     },
     {
-      label: locale === 'uk' ? 'Архітектура' : 'Architecture',
+      label: t('skills.architecture'),
       skills: [
         { name: 'Micro Frontends' },
         { name: 'System Design' },
         { name: 'Monorepo / Nx' },
+        { name: 'Docker / K8s' },
       ]
     },
     {
-      label: 'Web',
+      label: t('skills.ui'),
       skills: [
-        { name: 'HTML5' },
-        { name: 'CSS3 / SCSS' },
+        { name: 'Design Systems' },
+        { name: 'UI Kit' },
+        { name: 'HTML / CSS / SCSS' },
         { name: 'Performance' },
         { name: 'Testing' },
       ]
@@ -62,7 +64,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <SectionLabel number="03" label={locale === 'uk' ? 'НАВИЧКИ' : 'SKILLS'} />
+          <SectionLabel number="03" label={t('skills.sectionLabel')} />
           <h2 id="skills-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('skills.title')}
           </h2>

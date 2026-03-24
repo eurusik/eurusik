@@ -4,7 +4,7 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const Testimonials = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
 
   const testimonials = [
     {
@@ -31,7 +31,7 @@ const Testimonials = () => {
   ]
 
   return (
-    <section id="testimonials" className="py-24 px-6 bg-[#111113] border-t border-[#2A2A2E]" aria-labelledby="testimonials-heading">
+    <section id="testimonials" className="py-24 px-6 bg-[#0A0A0B] border-t border-[#2A2A2E]" aria-labelledby="testimonials-heading">
       <div className="max-w-6xl mx-auto">
         <m.div
           initial={{ opacity: 0, y: 12 }}
@@ -40,7 +40,7 @@ const Testimonials = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <SectionLabel number="07" label={locale === 'uk' ? 'ВІДГУКИ' : 'TESTIMONIALS'} />
+          <SectionLabel number="07" label={t('testimonials.sectionLabel')} />
           <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {t('testimonials.title')}
           </h2>

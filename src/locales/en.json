@@ -2,7 +2,7 @@
   "hero": {
     "name": "Eugene Rusakov",
     "title": "Senior Frontend Developer | Tech Lead",
-    "subtitle": "11+ years of experience in React, Angular & TypeScript",
+    "subtitle": "Crafting high-load, scalable web experiences",
     "contactMe": "Contact Me",
     "downloadCV": "Download CV",
     "available": "Available for work",
@@ -10,6 +10,11 @@
   },
   "about": {
     "title": "About Me",
+    "stats": {
+      "companies": "companies",
+      "projects": "projects shipped",
+      "users": "users served"
+    },
     "experience": "11+ years of experience",
     "description1": "building scalable web applications for Ukraine's leading tech companies. Maintaining",
     "angularPrimitives": "Angular Primitives",
@@ -25,6 +30,7 @@
   },
   "blog": {
     "title": "Latest Articles",
+    "sectionLabel": "ARTICLES",
     "subtitle": "Thoughts and insights on frontend development",
     "viewAll": "View All Articles on",
     "viewAllDOU": "View All Articles on DOU",
@@ -41,14 +47,23 @@
   },
   "experience": {
     "title": "Work Experience",
+    "sectionLabel": "EXPERIENCE",
+    "current": "Current",
     "interested": "Interested? Let's talk.",
     "getInTouch": "Get in Touch"
   },
   "skills": {
-    "title": "Skills & Technologies"
+    "title": "Skills & Technologies",
+    "sectionLabel": "SKILLS",
+    "frameworks": "Frameworks",
+    "languages": "Languages",
+    "backend": "Backend",
+    "architecture": "Architecture",
+    "ui": "UI / DX"
   },
   "education": {
     "title": "Education",
+    "sectionLabel": "EDUCATION",
     "degree": "Bachelor's Degree in Computer Science",
     "institution": "Kharkiv Social and Economic Institute",
     "period": "2013 - 2017",
@@ -96,10 +111,12 @@
   },
   "testimonials": {
     "title": "Testimonials",
+    "sectionLabel": "TESTIMONIALS",
     "subtitle": "What colleagues and clients say"
   },
   "contact": {
     "title": "Let's Work Together",
+    "sectionLabel": "CONTACT",
     "subtitle": "Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.",
     "email": "Email",
     "github": "GitHub",

@@ -4,7 +4,7 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const Contact = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
 
   const contactInfo = [
     { icon: <Mail size={20} />, label: t('contact.email'), value: "john.rusakov@gmail.com", link: "mailto:john.rusakov@gmail.com" },
@@ -23,7 +23,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <SectionLabel number="08" label={locale === 'uk' ? 'КОНТАКТИ' : 'CONTACT'} />
+          <SectionLabel number="08" label={t('contact.sectionLabel')} />
           <h2 id="contact-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-[#EDEDEF]">
             {t('contact.title')}
           </h2>

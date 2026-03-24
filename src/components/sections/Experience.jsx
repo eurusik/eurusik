@@ -80,7 +80,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <SectionLabel number="02" label={locale === 'uk' ? 'ДОСВІД' : 'EXPERIENCE'} />
+          <SectionLabel number="02" label={t('experience.sectionLabel')} />
           <h2 id="experience-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EDEDEF]">
             {data.title}
           </h2>
@@ -115,7 +115,7 @@ const Experience = () => {
                 <span className="text-sm text-[#A0A0A8]">
                   {exp.company} {exp.location && `\u00b7 ${exp.location}`}
                 </span>
-                {exp.isCurrent && <span className="tag-status text-[10px]">{locale === 'uk' ? 'Зараз' : 'Current'}</span>}
+                {exp.isCurrent && <span className="tag-status text-[10px]">{t('experience.current')}</span>}
               </div>
 
               <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-[#EDEDEF]">

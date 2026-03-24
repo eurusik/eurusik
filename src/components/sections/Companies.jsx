@@ -7,7 +7,7 @@ const Companies = () => {
   const companies = [
     { name: "Silpo", logo: "/logos/silpo.svg", url: "https://silpo.ua", size: "h-10 max-w-[140px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
     { name: "Rozetka", logo: "/logos/rozetka.png", url: "https://rozetka.ua", size: "h-10 max-w-[140px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
-    { name: "Mastercard", logo: "/logos/mastercard.svg", url: "https://mastercard.ua", size: "h-10 max-w-[100px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
+    { name: "Mastercard", logo: "/logos/mastercard.svg", url: "https://www.mastercard.com", size: "h-10 max-w-[100px]", filter: "opacity-60 grayscale brightness-[2] contrast-[0.7]" },
     { name: "Electronic Arts", logo: "/logos/ea.svg", url: "https://ea.com", size: "h-[72px] w-[72px]", filter: "opacity-60 brightness-0 invert" }
   ]
 

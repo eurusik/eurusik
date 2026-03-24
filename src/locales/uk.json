@@ -2,7 +2,7 @@
   "hero": {
     "name": "Євген Русаков",
     "title": "Senior Frontend Розробник | Tech Lead",
-    "subtitle": "11+ років досвіду в React, Angular та TypeScript",
+    "subtitle": "Створюю високонавантажені, масштабовані веб-рішення",
     "contactMe": "Зв'язатися зі мною",
     "downloadCV": "Завантажити резюме",
     "available": "Відкритий до пропозицій",
@@ -10,6 +10,11 @@
   },
   "about": {
     "title": "Про мене",
+    "stats": {
+      "companies": "компаній",
+      "projects": "проєктів",
+      "users": "користувачів"
+    },
     "experience": "11+ років досвіду",
     "description1": "у створенні масштабованих веб-додатків для провідних технологічних компаній України. Мейнтейнер",
     "angularPrimitives": "Angular Primitives",
@@ -25,6 +30,7 @@
   },
   "blog": {
     "title": "Останні статті",
+    "sectionLabel": "СТАТТІ",
     "subtitle": "Думки та інсайти про frontend розробку",
     "viewAll": "Переглянути всі статті на",
     "viewAllDOU": "Переглянути всі статті на DOU",
@@ -41,14 +47,23 @@
   },
   "experience": {
     "title": "Досвід роботи",
+    "sectionLabel": "ДОСВІД",
+    "current": "Зараз",
     "interested": "Зацікавлені? Давайте поговоримо.",
     "getInTouch": "Зв'язатися"
   },
   "skills": {
-    "title": "Навички та технології"
+    "title": "Навички та технології",
+    "sectionLabel": "НАВИЧКИ",
+    "frameworks": "Фреймворки",
+    "languages": "Мови",
+    "backend": "Бекенд",
+    "architecture": "Архітектура",
+    "ui": "UI / DX"
   },
   "education": {
     "title": "Освіта",
+    "sectionLabel": "ОСВІТА",
     "degree": "Бакалавр комп'ютерних наук",
     "institution": "Харківський соціально-економічний інститут",
     "period": "2013 - 2017",
@@ -96,10 +111,12 @@
   },
   "testimonials": {
     "title": "Відгуки",
+    "sectionLabel": "ВІДГУКИ",
     "subtitle": "Що кажуть колеги та клієнти"
   },
   "contact": {
     "title": "Давайте працювати разом",
+    "sectionLabel": "КОНТАКТИ",
     "subtitle": "Готові втілити ваші ідеї в життя? Давайте обговоримо ваш наступний проєкт і створимо щось неймовірне разом.",
     "email": "Email",
     "github": "GitHub",

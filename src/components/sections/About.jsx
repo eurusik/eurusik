@@ -3,12 +3,12 @@ import { useTranslation } from '../../contexts/LanguageContext'
 import SectionLabel from '../layout/SectionLabel'
 
 const About = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
 
   const stats = [
-    { value: '11+', label: locale === 'uk' ? 'років досвіду' : 'years experience' },
-    { value: '5+', label: locale === 'uk' ? 'компаній' : 'companies' },
-    { value: '20+', label: locale === 'uk' ? 'проєктів' : 'projects shipped' },
+    { value: '5+', label: t('about.stats.companies') },
+    { value: '20+', label: t('about.stats.projects') },
+    { value: '10M+', label: t('about.stats.users') },
   ]
 
   return (
