@@ -3,7 +3,6 @@ import { Mail } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import CodeBlock from '../ui/CodeBlock'
 import HomelabBadge from '../ui/HomelabBadge'
-import CursorTrail from '../ui/CursorTrail'
 
 const Hero = () => {
   const { t } = useTranslation()
@@ -26,9 +25,6 @@ const Hero = () => {
     >
       {/* Parallax grid */}
       <m.div className="absolute inset-0 hero-grid" style={{ y: gridY }} />
-
-      {/* Cursor particle trail */}
-      <CursorTrail />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
