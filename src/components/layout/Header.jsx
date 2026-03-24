@@ -52,7 +52,7 @@ const Header = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-4 flex-shrink-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-4 flex-shrink-0 ml-6">
             <LanguageSwitcher />
             <div className="hidden md:flex items-center gap-4 lg:gap-5 ml-2">
               {SOCIAL_LINKS.map((link) => (
