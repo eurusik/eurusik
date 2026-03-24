@@ -5,7 +5,7 @@ const STORAGE_KEY = 'codeblock-played'
 
 const CodeBlock = () => {
   const { locale } = useTranslation()
-  const hasPlayed = typeof window !== 'undefined' && sessionStorage.getItem(STORAGE_KEY)
+  const [hasPlayed, setHasPlayed] = useState(false)
 
   const codeLines = useMemo(() => locale === 'uk' ? [
     { type: 'first' },
@@ -27,7 +27,13 @@ const CodeBlock = () => {
     { type: 'last' },
   ], [locale])
 
-  const [displayedLines, setDisplayedLines] = useState(hasPlayed ? codeLines.length : 0)
+  const [displayedLines, setDisplayedLines] = useState(0)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem(STORAGE_KEY)) {
+      setHasPlayed(true)
+    }
+  }, [])
 
   useEffect(() => {
     setDisplayedLines(0)
