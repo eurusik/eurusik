@@ -1,11 +1,31 @@
-import { m } from 'framer-motion'
+import { useRef, useEffect, useState, useCallback } from 'react'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import CodeBlock from '../ui/CodeBlock'
 import HomelabBadge from '../ui/HomelabBadge'
 
 const Hero = () => {
-  const { t, locale } = useTranslation()
+  const { t } = useTranslation()
+  const sectionRef = useRef(null)
+  const glowRef = useRef(null)
+  const [showGlow, setShowGlow] = useState(false)
+
+  // Parallax
+  const { scrollY } = useScroll()
+  const gridY = useTransform(scrollY, [0, 600], [0, 80])
+
+  // Cursor glow
+  const handleMouseMove = useCallback((e) => {
+    if (!glowRef.current) return
+    glowRef.current.style.left = e.clientX + 'px'
+    glowRef.current.style.top = e.clientY + 'px'
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    setShowGlow(true)
+  }, [])
 
   const scrollToContact = () => {
     const el = document.getElementById('contact')
@@ -16,11 +36,27 @@ const Hero = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="min-h-screen flex items-center justify-center px-6 sm:px-6 lg:px-8 relative overflow-hidden bg-[#0A0A0B]"
       aria-label="Hero Section"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => glowRef.current && (glowRef.current.style.opacity = '1')}
+      onMouseLeave={() => glowRef.current && (glowRef.current.style.opacity = '0')}
     >
-      <div className="absolute inset-0 hero-grid" />
+      {/* Parallax grid */}
+      <m.div className="absolute inset-0 hero-grid" style={{ y: gridY }} />
+
+      {/* Cursor glow */}
+      {showGlow && (
+        <div
+          ref={glowRef}
+          className="pointer-events-none fixed w-[300px] h-[300px] rounded-full opacity-0 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2 z-0 hidden lg:block"
+          style={{
+            background: 'radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%)',
+          }}
+        />
+      )}
 
       <div className="relative z-10 w-full max-w-6xl mx-auto py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -54,7 +90,6 @@ const Hero = () => {
               {t('hero.subtitle')}
             </p>
 
-            {/* Single CTA */}
             <button
               onClick={scrollToContact}
               className="btn-accent flex items-center justify-center gap-2 text-base w-full sm:w-auto"

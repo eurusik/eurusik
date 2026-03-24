@@ -1,4 +1,4 @@
-import { LazyMotion, domAnimation } from 'framer-motion'
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion'
 import { LanguageProvider } from './contexts/LanguageContext'
 import Header from './components/layout/Header'
 import Hero from './components/sections/Hero'
@@ -23,18 +23,26 @@ function App({ locale = 'uk' }) {
       <LazyMotion features={domAnimation}>
         <div className="min-h-screen bg-[#0A0A0B]">
           <Header />
-          <main>
-            <Hero />
-            <About />
-            <Companies />
-            <Experience />
-            <Skills />
-            <Education />
-            <Blog />
-            <GitHubActivity />
-            <Testimonials />
-            <Contact />
-          </main>
+          <AnimatePresence mode="wait">
+            <m.main
+              key={locale}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Hero />
+              <About />
+              <Companies />
+              <Experience />
+              <Skills />
+              <Education />
+              <Blog />
+              <GitHubActivity />
+              <Testimonials />
+              <Contact />
+            </m.main>
+          </AnimatePresence>
           <Footer />
           <BackToTop />
         </div>
