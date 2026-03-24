@@ -2,6 +2,7 @@ import { m } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { useTranslation } from '../../contexts/LanguageContext'
 import CodeBlock from '../ui/CodeBlock'
+import HomelabBadge from '../ui/HomelabBadge'
 
 const Hero = () => {
   const { t, locale } = useTranslation()
@@ -71,6 +72,9 @@ const Hero = () => {
             className="w-full lg:w-[45%] flex-shrink-0"
           >
             <CodeBlock />
+            <div className="flex justify-center lg:justify-start mt-4">
+              <HomelabBadge />
+            </div>
           </m.div>
         </div>
       </div>
