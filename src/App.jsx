@@ -13,6 +13,8 @@ import Testimonials from './components/sections/Testimonials'
 import Contact from './components/sections/Contact'
 import Footer from './components/layout/Footer'
 import BackToTop from './components/ui/BackToTop'
+import Clippy from './components/ui/Clippy'
+import Win98Dialog from './components/ui/Win98Dialog'
 import { useEasterEgg } from './hooks'
 
 function App({ locale = 'uk' }) {
@@ -45,6 +47,8 @@ function App({ locale = 'uk' }) {
           </AnimatePresence>
           <Footer />
           <BackToTop />
+          <Clippy />
+          <Win98Dialog />
         </div>
       </LazyMotion>
     </LanguageProvider>
